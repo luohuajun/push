@@ -6,7 +6,7 @@ import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.Client;
-import com.shinemo.mpush.common.message.ErrorMessage;
+import com.shinemo.mpush.common.message.domain.ErrorMessage;
 import com.shinemo.mpush.netty.client.ChannelClientHandler;
 import com.shinemo.mpush.netty.connection.NettyConnection;
 import com.shinemo.mpush.push.PushRequest;

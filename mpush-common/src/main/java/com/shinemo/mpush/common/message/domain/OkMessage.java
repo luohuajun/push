@@ -1,10 +1,12 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.api.protocol.Packet;
-import io.netty.buffer.ByteBuf;
+import com.shinemo.mpush.common.message.BaseMessage;
+import com.shinemo.mpush.common.message.ByteBufMessage;
 
+import io.netty.buffer.ByteBuf;
 import static com.shinemo.mpush.api.protocol.Command.OK;
 
 /**
@@ -39,8 +41,8 @@ public final class OkMessage extends ByteBufMessage {
     }
 
     public static OkMessage from(BaseMessage src) {
-        return new OkMessage(src.packet.cmd, new Packet(OK
-                , src.packet.sessionId), src.connection);
+        return new OkMessage(src.getPacket().cmd, new Packet(OK
+                , src.getPacket().sessionId), src.getConnection());
     }
 
     public OkMessage setCode(byte code) {
@@ -57,7 +59,7 @@ public final class OkMessage extends ByteBufMessage {
     public String toString() {
         return "OkMessage{" +
                 "data='" + data + '\'' +
-                "packet='" + packet + '\'' +
+                "packet='" + getPacket() + '\'' +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.Client;
 import com.shinemo.mpush.api.connection.Connection;
-import com.shinemo.mpush.common.manage.ServerManage;
+import com.shinemo.mpush.common.container.ServerManage;
 import com.shinemo.mpush.conn.client.GatewayServerApplication;
 import com.shinemo.mpush.netty.client.NettyClient;
 import com.shinemo.mpush.netty.client.NettyClientFactory;

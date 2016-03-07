@@ -1,4 +1,4 @@
-package com.shinemo.mpush.common.handler;
+package com.shinemo.mpush.common.message;
 
 
 import com.shinemo.mpush.api.Message;

@@ -1,9 +1,10 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
-import io.netty.buffer.ByteBuf;
+import com.shinemo.mpush.common.message.ByteBufMessage;
 
+import io.netty.buffer.ByteBuf;
 import static com.shinemo.mpush.api.protocol.Command.FAST_CONNECT;
 
 /**

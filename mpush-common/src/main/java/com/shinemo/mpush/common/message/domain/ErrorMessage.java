@@ -1,11 +1,13 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.common.ErrorCode;
+import com.shinemo.mpush.common.message.BaseMessage;
+import com.shinemo.mpush.common.message.ByteBufMessage;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFutureListener;
-
 import static com.shinemo.mpush.api.protocol.Command.ERROR;
 
 /**
@@ -40,8 +42,8 @@ public final class ErrorMessage extends ByteBufMessage {
     }
 
     public static ErrorMessage from(BaseMessage src) {
-        return new ErrorMessage(src.packet.cmd, new Packet(ERROR
-                , src.packet.sessionId), src.connection);
+        return new ErrorMessage(src.getPacket().cmd, new Packet(ERROR
+                , src.getPacket().sessionId), src.getConnection());
     }
 
     public ErrorMessage setReason(String reason) {
@@ -70,7 +72,7 @@ public final class ErrorMessage extends ByteBufMessage {
         return "ErrorMessage{" +
                 "reason='" + reason + '\'' +
                 ", code=" + code +
-                ", packet=" + packet +
+                ", packet=" + getPacket() +
                 '}';
     }
 }

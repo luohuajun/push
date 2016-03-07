@@ -2,11 +2,11 @@ package com.shinemo.mpush.core.handler;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
-import com.shinemo.mpush.common.handler.BaseMessageHandler;
-import com.shinemo.mpush.common.message.ErrorMessage;
-import com.shinemo.mpush.common.message.OkMessage;
-import com.shinemo.mpush.common.message.PushMessage;
-import com.shinemo.mpush.common.message.gateway.GatewayPushMessage;
+import com.shinemo.mpush.common.message.BaseMessageHandler;
+import com.shinemo.mpush.common.message.domain.ErrorMessage;
+import com.shinemo.mpush.common.message.domain.GatewayPushMessage;
+import com.shinemo.mpush.common.message.domain.OkMessage;
+import com.shinemo.mpush.common.message.domain.PushMessage;
 import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.core.router.LocalRouter;
 import com.shinemo.mpush.core.router.RouterCenter;
@@ -16,8 +16,6 @@ import com.shinemo.mpush.tools.MPushUtil;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-
-
 import static com.shinemo.mpush.common.ErrorCode.*;
 
 /**

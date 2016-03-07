@@ -7,7 +7,7 @@
          <relativePath>../pom.xml</relativePath>
      </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <version>${mpush-version}</version>
     <artifactId>mpush-log</artifactId>
     <packaging>jar</packaging>
     <name>mpush-log</name>

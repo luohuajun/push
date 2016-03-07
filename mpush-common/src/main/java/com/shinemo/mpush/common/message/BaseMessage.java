@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class BaseMessage implements Message {
     private static final AtomicInteger ID_SEQ = new AtomicInteger();
-    protected final Packet packet;
-    protected final Connection connection;
+    private final Packet packet;
+    private final Connection connection;
 
     public BaseMessage(Packet packet, Connection connection) {
         this.packet = packet;

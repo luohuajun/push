@@ -1,4 +1,4 @@
-package com.shinemo.mpush.common.message.gateway;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.common.message.ByteBufMessage;

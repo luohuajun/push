@@ -1,8 +1,9 @@
-package com.shinemo.mpush.common.handler;
+package com.shinemo.mpush.common.message.handler;
 
 import com.shinemo.mpush.api.connection.Connection;
-import com.shinemo.mpush.common.message.ErrorMessage;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.message.BaseMessageHandler;
+import com.shinemo.mpush.common.message.domain.ErrorMessage;
 
 /**
  * Created by ohun on 2015/12/30.

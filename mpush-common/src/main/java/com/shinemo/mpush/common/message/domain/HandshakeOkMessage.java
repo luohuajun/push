@@ -1,7 +1,10 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.message.BaseMessage;
+import com.shinemo.mpush.common.message.ByteBufMessage;
+
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -34,7 +37,7 @@ public final class HandshakeOkMessage extends ByteBufMessage {
     }
 
     public static HandshakeOkMessage from(BaseMessage src) {
-        return new HandshakeOkMessage(src.createResponse(), src.connection);
+        return new HandshakeOkMessage(src.createResponse(), src.getConnection());
     }
 
     public HandshakeOkMessage setServerKey(byte[] serverKey) {

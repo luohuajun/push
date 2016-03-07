@@ -1,7 +1,8 @@
-package com.shinemo.mpush.common.router;
+package com.shinemo.mpush.common.router.manager;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.shinemo.mpush.common.router.RemoteRouter;
 
 import java.util.concurrent.TimeUnit;
 

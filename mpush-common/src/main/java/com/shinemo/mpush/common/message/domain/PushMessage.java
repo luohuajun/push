@@ -1,8 +1,9 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.Constants;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.message.BaseMessage;
 
 import static com.shinemo.mpush.api.protocol.Command.PUSH;
 

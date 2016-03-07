@@ -1,7 +1,10 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.message.BaseMessage;
+import com.shinemo.mpush.common.message.ByteBufMessage;
+
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -15,7 +18,7 @@ public final class FastConnectOkMessage extends ByteBufMessage {
     }
 
     public static FastConnectOkMessage from(BaseMessage src) {
-        return new FastConnectOkMessage(src.createResponse(), src.connection);
+        return new FastConnectOkMessage(src.createResponse(), src.getConnection());
     }
 
     @Override

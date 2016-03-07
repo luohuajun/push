@@ -10,7 +10,7 @@
     <artifactId>mpush-cs</artifactId>
     <name>mpush-cs</name>
     <packaging>jar</packaging>
-
+    <version>${mpush-version}</version>
     <dependencies>
         <dependency>
             <groupId>com.shinemo.mpush</groupId>

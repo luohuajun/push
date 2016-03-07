@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.common.app.Application;
-import com.shinemo.mpush.common.manage.ServerManage;
+import com.shinemo.mpush.common.container.ServerManage;
 import com.shinemo.mpush.tools.GenericsUtil;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.spi.ServiceContainer;

@@ -2,10 +2,10 @@ package com.shinemo.mpush.core.handler;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
-import com.shinemo.mpush.common.handler.BaseMessageHandler;
-import com.shinemo.mpush.common.message.ErrorMessage;
-import com.shinemo.mpush.common.message.FastConnectMessage;
-import com.shinemo.mpush.common.message.FastConnectOkMessage;
+import com.shinemo.mpush.common.message.BaseMessageHandler;
+import com.shinemo.mpush.common.message.domain.ErrorMessage;
+import com.shinemo.mpush.common.message.domain.FastConnectMessage;
+import com.shinemo.mpush.common.message.domain.FastConnectOkMessage;
 import com.shinemo.mpush.core.session.ReusableSession;
 import com.shinemo.mpush.core.session.ReusableSessionManager;
 import com.shinemo.mpush.log.LogType;

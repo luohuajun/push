@@ -7,7 +7,7 @@ import com.shinemo.mpush.api.event.RouterChangeEvent;
 import com.shinemo.mpush.api.router.ClientLocation;
 import com.shinemo.mpush.api.router.Router;
 import com.shinemo.mpush.common.AbstractEventContainer;
-import com.shinemo.mpush.common.message.KickUserMessage;
+import com.shinemo.mpush.common.message.domain.KickUserMessage;
 import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;

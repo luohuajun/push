@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by ohun on 2015/12/23.
  */
-public final class UserManager extends com.shinemo.mpush.common.manage.user.UserManager {
+public final class UserManager  extends com.shinemo.mpush.common.user.manager.UserManager{
     public static final Logger LOGGER = LoggerFactory.getLogger(UserManager.class);
 
     public static final String ONLINE_CHANNEL = "/mpush/online/";

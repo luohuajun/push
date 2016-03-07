@@ -1,7 +1,8 @@
-package com.shinemo.mpush.common.router;
+package com.shinemo.mpush.common.router.manager;
 
 import com.shinemo.mpush.api.RedisKey;
 import com.shinemo.mpush.api.router.RouterManager;
+import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 import org.slf4j.Logger;

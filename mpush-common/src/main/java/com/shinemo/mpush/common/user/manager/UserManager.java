@@ -1,4 +1,4 @@
-package com.shinemo.mpush.common.manage.user;
+package com.shinemo.mpush.common.user.manager;
 
 import java.util.List;
 

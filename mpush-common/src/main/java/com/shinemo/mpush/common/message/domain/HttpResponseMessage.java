@@ -1,9 +1,11 @@
-package com.shinemo.mpush.common.message;
+package com.shinemo.mpush.common.message.domain;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.message.ByteBufMessage;
 import com.shinemo.mpush.tools.Constants;
 import com.shinemo.mpush.tools.MPushUtil;
+
 import io.netty.buffer.ByteBuf;
 
 import java.util.Arrays;
@@ -40,7 +42,7 @@ public class HttpResponseMessage extends ByteBufMessage {
     }
 
     public static HttpResponseMessage from(HttpRequestMessage src) {
-        return new HttpResponseMessage(src.createResponse(), src.connection);
+        return new HttpResponseMessage(src.createResponse(), src.getConnection());
     }
 
     public HttpResponseMessage setStatusCode(int statusCode) {
