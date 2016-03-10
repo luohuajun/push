@@ -14,8 +14,8 @@ public interface Module {
 	String getName();
 	
 	interface Listener {
-        void onSuccess();
-        void onFailure(String message);
+        void onSuccess(Module module);
+        void onFailure(Module module,String message);
     }
 	
 }

@@ -3,15 +3,13 @@
      <parent>
          <artifactId>mpush</artifactId>
          <groupId>com.shinemo.mpush</groupId>
-         <version>0.0.0.2</version>
+         <version>0.0.0.3</version>
          <relativePath>../pom.xml</relativePath>
      </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${mpush-version}</version>
     <artifactId>mpush-test</artifactId>
     <packaging>jar</packaging>
     <name>mpush-test</name>
-
 
     <dependencies>
         <dependency>

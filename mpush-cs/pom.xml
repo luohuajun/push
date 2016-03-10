@@ -3,14 +3,13 @@
      <parent>
          <artifactId>mpush</artifactId>
          <groupId>com.shinemo.mpush</groupId>
-         <version>0.0.0.2</version>
+         <version>0.0.0.3</version>
          <relativePath>../pom.xml</relativePath>
      </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mpush-cs</artifactId>
     <name>mpush-cs</name>
     <packaging>jar</packaging>
-    <version>${mpush-version}</version>
     <dependencies>
         <dependency>
             <groupId>com.shinemo.mpush</groupId>
@@ -63,6 +62,8 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>2.6</version>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <!-- Configuration of the archiver -->

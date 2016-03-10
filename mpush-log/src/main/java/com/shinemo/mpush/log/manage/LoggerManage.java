@@ -1,10 +1,13 @@
-package com.shinemo.mpush.log;
+package com.shinemo.mpush.log.manage;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.shinemo.mpush.log.LogLevel;
+import com.shinemo.mpush.log.LogType;
 
 public class LoggerManage {
 	

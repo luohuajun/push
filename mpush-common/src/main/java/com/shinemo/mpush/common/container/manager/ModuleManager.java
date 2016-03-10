@@ -56,5 +56,5 @@ public class ModuleManager implements Module{
 	public String getName() {
 		return "moduleManager";
 	}
-
+	
 }
