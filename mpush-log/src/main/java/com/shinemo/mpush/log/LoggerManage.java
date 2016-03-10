@@ -1,4 +1,4 @@
-package com.shinemo.mpush.log.manage;
+package com.shinemo.mpush.log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.shinemo.mpush.log.LogLevel;
 import com.shinemo.mpush.log.LogType;
 
-public class LoggerManage {
+public class LoggerManage{
 	
 	private static final Logger connectionLog = LoggerFactory.getLogger("connectionLog");
 	private static final Logger pushLog = LoggerFactory.getLogger("pushLog");
@@ -123,9 +123,5 @@ public class LoggerManage {
 			log(LogType.PUSH, level, null, format, arguments);
 		}
 	}	
-	public static void main(String[] args) {
-		String format = "client connect channel=%s";
-		System.out.println(String.format(format, "hi"));
-	}
 	
 }

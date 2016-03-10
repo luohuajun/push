@@ -32,13 +32,13 @@
           <groupId>org.logback-extensions</groupId>
           <artifactId>logback-ext-spring</artifactId>
       </dependency>
-      <dependency>
+      <!-- <dependency>
           <groupId>com.shinemo.mpush</groupId>
           <artifactId>mpush-common</artifactId>
       </dependency>
       <dependency>
           <groupId>com.shinemo.mpush</groupId>
           <artifactId>mpush-tools</artifactId>
-      </dependency>
+      </dependency> -->
     </dependencies>
 </project>
