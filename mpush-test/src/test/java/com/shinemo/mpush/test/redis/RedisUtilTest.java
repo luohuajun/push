@@ -9,9 +9,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.shinemo.mpush.api.RedisKey;
-import com.shinemo.mpush.tools.redis.RedisNode;
-import com.shinemo.mpush.tools.redis.RedisUtil;
+import com.shinemo.mpush.common.redis.RedisNode;
+import com.shinemo.mpush.common.redis.RedisUtil;
 
 import redis.clients.jedis.Jedis;
 

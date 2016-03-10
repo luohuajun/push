@@ -13,8 +13,6 @@ import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
 import com.shinemo.mpush.tools.redis.manage.RedisManage;
 import com.shinemo.mpush.tools.spi.ServiceContainer;
-import com.shinemo.mpush.tools.zk.ZKPath;
-import com.shinemo.mpush.tools.zk.ZkRegister;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -31,7 +29,7 @@ public final class AdminHandler extends SimpleChannelInboundHandler<String> {
 	
 	private static final String ONE_END = "\r\n";
 	
-	protected static final ZkRegister zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+	protected static final  zkRegister = ServiceContainer.getInstance(ZkRegister.class);
 	
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, String request) throws Exception {

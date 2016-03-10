@@ -8,24 +8,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.common.redis.RedisGroup;
+import com.shinemo.mpush.common.redis.RedisNode;
+import com.shinemo.mpush.common.zk.ZKPath;
+import com.shinemo.mpush.common.zk.ZkManage;
+import com.shinemo.mpush.common.zk.manage.ZkManageImpl;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.core.server.ConnectionServer;
 import com.shinemo.mpush.tools.Constants;
 import com.shinemo.mpush.tools.MPushUtil;
 import com.shinemo.mpush.tools.Jsons;
-import com.shinemo.mpush.tools.redis.RedisGroup;
-import com.shinemo.mpush.tools.redis.RedisNode;
-import com.shinemo.mpush.tools.zk.ZKPath;
-import com.shinemo.mpush.tools.zk.ZkRegister;
-import com.shinemo.mpush.tools.zk.curator.services.ZkRegisterManager;
 
 public class ZkUtilTest {
 
-    private ZkRegister zkUtil;
+    private ZkManage zkUtil;
 
     @Before
     public void setUp() throws Exception {
-        zkUtil = new ZkRegisterManager();
+        zkUtil = new ZkManageImpl();
     }
 
     @Test

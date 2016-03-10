@@ -7,16 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.shinemo.mpush.tools.redis.RedisGroup;
-import com.shinemo.mpush.tools.redis.RedisNode;
-import com.shinemo.mpush.tools.redis.RedisRegister;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
-import com.shinemo.mpush.tools.redis.pubsub.Subscriber;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
+import com.shinemo.mpush.common.redis.RedisGroup;
+import com.shinemo.mpush.common.redis.RedisManage;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
+import com.shinemo.mpush.common.redis.RedisNode;
+import com.shinemo.mpush.common.redis.pubsub.Subscriber;
+import com.shinemo.mpush.common.spi.ServiceContainer;
 
 public class PubSubTest {
 	
-    private RedisRegister redisRegister = ServiceContainer.getInstance(RedisRegister.class);
+    private RedisManage redisRegister = ServiceContainer.getInstance(RedisManage.class);
     
     @Before
     public void init(){
@@ -29,30 +29,30 @@ public class PubSubTest {
 	
 	@Test
 	public void subpubTest(){
-		RedisManage.subscribe(Subscriber.holder, "/hello/123");
-		RedisManage.subscribe(Subscriber.holder, "/hello/124");	
-		RedisManage.publish("/hello/123", "123");
-		RedisManage.publish("/hello/124", "124");
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/123");
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/124");	
+		RedisManageUtil.publish("/hello/123", "123");
+		RedisManageUtil.publish("/hello/124", "124");
 	}
 	
 	@Test
 	public void pubsubTest(){
-		RedisManage.publish("/hello/123", "123");
-		RedisManage.publish("/hello/124", "124");
-		RedisManage.subscribe(Subscriber.holder, "/hello/123");
-		RedisManage.subscribe(Subscriber.holder, "/hello/124");	
+		RedisManageUtil.publish("/hello/123", "123");
+		RedisManageUtil.publish("/hello/124", "124");
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/123");
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/124");	
 	}
 	
 	@Test
 	public void pubTest(){
-		RedisManage.publish("/hello/123", "123");
-		RedisManage.publish("/hello/124", "124");
+		RedisManageUtil.publish("/hello/123", "123");
+		RedisManageUtil.publish("/hello/124", "124");
 	}
 	
 	@Test
 	public void subTest(){
-		RedisManage.subscribe(Subscriber.holder, "/hello/123");
-		RedisManage.subscribe(Subscriber.holder, "/hello/124");	
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/123");
+		RedisManageUtil.subscribe(Subscriber.holder, "/hello/124");	
 		LockSupport.park();
 	}
 	

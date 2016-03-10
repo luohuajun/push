@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.common.container.manager.ModuleManager;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
+import com.shinemo.mpush.common.spi.ServiceContainer;
+
 
 
 public abstract class BaseModule implements Module{

@@ -2,22 +2,19 @@ package com.shinemo.mpush.common;
 
 import java.util.List;
 
-
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.common.spi.ServiceContainer;
+import com.shinemo.mpush.common.zk.ZkManage;
+import com.shinemo.mpush.common.zk.listener.DataChangeListener;
+import com.shinemo.mpush.common.zk.listener.impl.RedisPathListener;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.config.ConfigCenter;
-import com.shinemo.mpush.tools.redis.RedisGroup;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
-import com.shinemo.mpush.tools.zk.ZKPath;
-import com.shinemo.mpush.tools.zk.ZkRegister;
-import com.shinemo.mpush.tools.zk.listener.DataChangeListener;
-import com.shinemo.mpush.tools.zk.listener.impl.RedisPathListener;
 
 public abstract class AbstractClient {
 	
     protected List<DataChangeListener> dataChangeListeners = Lists.newArrayList();
     
-    protected ZkRegister zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+    protected ZkManage zkRegister = ServiceContainer.getInstance(ZkManage.class);
     
 	public AbstractClient() {
 		registerListener(new RedisPathListener());

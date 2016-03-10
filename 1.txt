@@ -1,0 +1,94 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.shinemo.mpush:mpush-cs:jar:0.0.0.2
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 64, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] mpush
+[INFO] mpush-api
+[INFO] mpush-core
+[INFO] mpush-tools
+[INFO] mpush-netty
+[INFO] mpush-common
+[INFO] mpush-client
+[INFO] mpush-cs
+[INFO] mpush-test
+[INFO] mpush-monitor
+[INFO] mpush-log
+[INFO] mpush-zk
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush 0.0.0.2
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/mangguoyisheng/mpush/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush ---
+[INFO] com.shinemo.mpush:mpush:pom:0.0.0.2
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-api 0.0.0.2
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-api ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/mangguoyisheng/mpush/mpush-api/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-api ---
+[INFO] com.shinemo.mpush:mpush-api:jar:0.0.0.2
+[INFO] +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-core 0.0.0.2
+[INFO] ------------------------------------------------------------------------
+[WARNING] The POM for com.shinemo.mpush:mpush-netty:jar:0.0.0.3 is missing, no dependency information available
+[WARNING] The POM for com.shinemo.mpush:mpush-client:jar:0.0.0.3 is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] mpush ............................................. SUCCESS [  1.246 s]
+[INFO] mpush-api ......................................... SUCCESS [  0.057 s]
+[INFO] mpush-core ........................................ FAILURE [  0.042 s]
+[INFO] mpush-tools ....................................... SKIPPED
+[INFO] mpush-netty ....................................... SKIPPED
+[INFO] mpush-common ...................................... SKIPPED
+[INFO] mpush-client ...................................... SKIPPED
+[INFO] mpush-cs .......................................... SKIPPED
+[INFO] mpush-test ........................................ SKIPPED
+[INFO] mpush-monitor ..................................... SKIPPED
+[INFO] mpush-log ......................................... SKIPPED
+[INFO] mpush-zk .......................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.998 s
+[INFO] Finished at: 2016-03-10T15:54:37+08:00
+[INFO] Final Memory: 16M/220M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project mpush-core: Could not resolve dependencies for project com.shinemo.mpush:mpush-core:jar:0.0.0.2: The following artifacts could not be resolved: com.shinemo.mpush:mpush-netty:jar:0.0.0.3, com.shinemo.mpush:mpush-client:jar:0.0.0.3: Failure to find com.shinemo.mpush:mpush-netty:jar:0.0.0.3 in http://115.29.208.92:8081/nexus/content/groups/public/ was cached in the local repository, resolution will not be reattempted until the update interval of central has elapsed or updates are forced -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :mpush-core

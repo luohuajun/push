@@ -1,8 +1,7 @@
 package com.shinemo.mpush.common.container;
 
 import com.shinemo.mpush.common.container.manager.PluginManager;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
-
+import com.shinemo.mpush.common.spi.ServiceContainer;
 
 public abstract class BasePlugin implements Plugin{
 

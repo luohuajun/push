@@ -1,6 +1,7 @@
 package com.shinemo.mpush.common.container;
 
-import com.shinemo.mpush.tools.spi.SPI;
+import com.shinemo.mpush.common.spi.SPI;
+
 
 @SPI("")
 public interface Module {
