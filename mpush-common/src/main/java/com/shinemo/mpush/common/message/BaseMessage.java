@@ -5,6 +5,7 @@ import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.connection.SessionContext;
 import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.tools.IOUtils;
+import com.shinemo.mpush.tools.Profiler;
 import com.shinemo.mpush.tools.config.ConfigCenter;
 
 import io.netty.channel.ChannelFutureListener;
@@ -22,7 +23,12 @@ public abstract class BaseMessage implements Message {
     public BaseMessage(Packet packet, Connection connection) {
         this.packet = packet;
         this.connection = connection;
-        this.decodeBody();
+        Profiler.enter("start decode message");
+        try {
+            decodeBody();
+        } finally {
+            Profiler.release();
+        }
     }
 
     protected void decodeBody() {
@@ -30,22 +36,19 @@ public abstract class BaseMessage implements Message {
             //1.解密
             byte[] tmp = packet.body;
             if (packet.hasFlag(Packet.FLAG_CRYPTO)) {
-                SessionContext info = connection.getSessionContext();
-                if (info.cipher != null) {
-                    tmp = info.cipher.decrypt(tmp);
+                if (connection.getSessionContext().cipher != null) {
+                    tmp = connection.getSessionContext().cipher.decrypt(tmp);
                 }
             }
-
             //2.解压
             if (packet.hasFlag(Packet.FLAG_COMPRESS)) {
-                byte[] result = IOUtils.uncompress(tmp);
-                if (result.length > 0) {
-                    tmp = result;
-                }
+                tmp = IOUtils.uncompress(tmp);
             }
+
             if (tmp.length == 0) {
                 throw new RuntimeException("message decode ex");
             }
+
             packet.body = tmp;
             decode(packet.body);
         }

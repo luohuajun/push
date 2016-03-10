@@ -3,7 +3,6 @@ package com.shinemo.mpush.core.handler;
 import com.google.common.base.Strings;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
-import com.shinemo.mpush.common.DnsMapping;
 import com.shinemo.mpush.common.message.BaseMessageHandler;
 import com.shinemo.mpush.common.message.domain.HttpRequestMessage;
 import com.shinemo.mpush.common.message.domain.HttpResponseMessage;
@@ -12,11 +11,11 @@ import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.netty.client.HttpCallback;
 import com.shinemo.mpush.netty.client.HttpClient;
 import com.shinemo.mpush.netty.client.RequestInfo;
-import com.shinemo.mpush.tools.MPushUtil;
-
+import com.shinemo.mpush.tools.Profiler;
+import com.shinemo.mpush.tools.dns.DnsMapping;
+import com.shinemo.mpush.tools.dns.manage.DnsMappingManage;
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.*;
-
 import org.slf4j.Logger;
 
 import java.net.InetSocketAddress;
@@ -32,10 +31,8 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
     private static final Logger LOGGER = LoggerManage.getLog(LogType.HTTP);
     private final HttpClient httpClient;
-    private final DnsMapping dnsMapping;
 
     public HttpProxyHandler(HttpClient httpClient) {
-        this.dnsMapping = new DnsMapping();
         this.httpClient = httpClient;
         this.httpClient.start();
     }
@@ -47,24 +44,32 @@ public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
 
     @Override
     public void handle(HttpRequestMessage message) {
-        String method = message.getMethod();
-        String uri = message.uri;
-        if (Strings.isNullOrEmpty(uri)) {
-            HttpResponseMessage
-                    .from(message)
-                    .setStatusCode(400)
-                    .setReasonPhrase("Bad Request")
-                    .sendRaw();
-            LOGGER.warn("request url is empty!");
-        }
-
-        uri = doDnsMapping(uri);
-        FullHttpRequest request = new DefaultFullHttpRequest(HTTP_1_1, HttpMethod.valueOf(method), uri);
-        setHeaders(request, message);
-        setBody(request, message);
 
         try {
+            Profiler.enter("start http proxy handler");
+            String method = message.getMethod();
+            String uri = message.uri;
+            if (Strings.isNullOrEmpty(uri)) {
+                HttpResponseMessage
+                        .from(message)
+                        .setStatusCode(400)
+                        .setReasonPhrase("Bad Request")
+                        .sendRaw();
+                LOGGER.warn("request url is empty!");
+            }
+
+            uri = doDnsMapping(uri);
+            FullHttpRequest request = new DefaultFullHttpRequest(HTTP_1_1, HttpMethod.valueOf(method), uri);
+            Profiler.enter("start set full http headers");
+            setHeaders(request, message);
+            Profiler.release();
+            Profiler.enter("start set full http body");
+            setBody(request, message);
+            Profiler.release();
+
+            Profiler.enter("start http proxy request");
             httpClient.request(new RequestInfo(request, new DefaultHttpCallback(message)));
+            Profiler.release();
         } catch (Exception e) {
             HttpResponseMessage
                     .from(message)
@@ -72,6 +77,8 @@ public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
                     .setReasonPhrase("Bad Gateway")
                     .sendRaw();
             LOGGER.error("send request ex, message=" + message, e);
+        } finally {
+            Profiler.release();
         }
     }
 
@@ -153,7 +160,10 @@ public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
             }
         }
         InetSocketAddress remoteAddress = (InetSocketAddress) message.getConnection().getChannel().remoteAddress();
-        request.headers().add("x-forwarded-for", remoteAddress.getHostName() + "," + MPushUtil.getLocalIp());
+        Profiler.enter("start set x-forwarded-for");
+        String remoteIp = remoteAddress.getAddress().getHostAddress();
+        request.headers().add("x-forwarded-for", remoteIp);
+        Profiler.release();
         request.headers().add("x-forwarded-port", Integer.toString(remoteAddress.getPort()));
     }
 
@@ -174,8 +184,8 @@ public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
         }
         if (uri == null) return url;
         String host = uri.getHost();
-        String localHost = dnsMapping.translate(host);
-        if (localHost == null) return url;
-        return url.replace(host, localHost);
+        DnsMapping mapping = DnsMappingManage.holder.translate(host);
+        if (mapping == null) return url;
+        return url.replaceFirst(host, mapping.toString());
     }
 }

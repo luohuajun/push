@@ -7,9 +7,10 @@ import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.PacketReceiver;
 import com.shinemo.mpush.common.EventBus;
-import com.shinemo.mpush.log.LogLevel;
+import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.netty.connection.NettyConnection;
+import com.shinemo.mpush.tools.Profiler;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -41,22 +42,33 @@ public final class ServerChannelHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        Connection connection = connectionManager.get(ctx.channel());
-        LOGGER.debug("channelRead channel={}, packet={}", ctx.channel(), msg);
-        connection.updateLastReadTime();
-        receiver.onReceive((Packet) msg, connection);
+    	try{
+    		 Profiler.start("end channel read:");
+    		 Connection connection = connectionManager.get(ctx.channel());
+	         LOGGER.debug("channelRead channel={}, packet={}", ctx.channel(), msg);
+	         connection.updateLastReadTime();
+	         receiver.onReceive((Packet) msg, connection);
+    	}finally{
+    		Profiler.release();
+    		long duration = Profiler.getDuration();
+    		if(duration>80){
+    			LOGGER.error("end channel read:"+duration+","+Profiler.dump());
+    		}
+    		Profiler.reset();
+    	}
+       
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         connectionManager.remove(ctx.channel());
-        LoggerManage.log(security, LogLevel.INFO, "client exceptionCaught channel={}", ctx.channel());
+        LoggerManage.info(LogType.CONNECTION, "client exceptionCaught channel={}", ctx.channel());
         LOGGER.error("caught an ex, channel={}", ctx.channel(), cause);
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        LoggerManage.log(security, LogLevel.INFO, "client connect channel={}", ctx.channel());
+    	LoggerManage.info(LogType.CONNECTION, "client connect channel={}", ctx.channel());
         Connection connection = new NettyConnection();
         connection.init(ctx.channel(), security);
         connectionManager.add(connection);
@@ -64,7 +76,7 @@ public final class ServerChannelHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        LoggerManage.log(security, LogLevel.INFO, "client disconnect channel={}", ctx.channel());
+    	LoggerManage.info(LogType.CONNECTION, "client disconnect channel={}", ctx.channel());
         Connection connection = connectionManager.get(ctx.channel());
         EventBus.INSTANCE.post(new ConnectionCloseEvent(connection));
         connectionManager.remove(ctx.channel());

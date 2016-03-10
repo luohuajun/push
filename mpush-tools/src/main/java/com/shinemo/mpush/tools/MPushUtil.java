@@ -1,10 +1,12 @@
 package com.shinemo.mpush.tools;
 
+import org.apache.commons.net.telnet.TelnetClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.tools.config.ConfigCenter;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
@@ -21,6 +23,8 @@ public final class MPushUtil {
     private static String LOCAL_IP;
     
     private static final Pattern LOCAL_IP_PATTERN = Pattern.compile("127(\\.\\d{1,3}){3}$");
+    
+    private static String EXTRANET_IP;
 
     public static boolean isLocalHost(String host) {
         return host == null 
@@ -52,6 +56,7 @@ public final class MPushUtil {
      */
     public static String getInetAddress() {
         try {
+        	com.shinemo.mpush.tools.Profiler.enter("start get inet addresss");
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
             InetAddress address = null;
             while (interfaces.hasMoreElements()) {
@@ -69,7 +74,16 @@ public final class MPushUtil {
         } catch (Throwable e) {
             LOGGER.error("getInetAddress exception", e);
             return "127.0.0.1";
+        }finally{
+        	com.shinemo.mpush.tools.Profiler.release();
         }
+    }
+    
+    public static String getExtranetIp(){
+    	if(EXTRANET_IP == null){
+    		EXTRANET_IP = getExtranetAddress();
+    	}
+    	return EXTRANET_IP;
     }
     
     public static String getExtranetAddress() {
@@ -127,5 +141,23 @@ public final class MPushUtil {
             headers.put(name, value);
         }
         return headers;
+    }
+    
+    public static boolean telnet(String ip,int port){
+    	TelnetClient client = new TelnetClient();
+    	try{
+    		client.connect(ip, port);
+    		return true;
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		try {
+    			if(client.isConnected()){
+    				client.disconnect();
+    			}
+			} catch (IOException e) {
+				LOGGER.error("disconnect error",e);
+			}
+    	}
     }
 }
