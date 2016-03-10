@@ -10,7 +10,7 @@ import com.shinemo.mpush.tools.spi.ServiceContainer;
 public abstract class BaseModule implements Module{
 
 	private static final Module moduleManager = ServiceContainer.getInstance(Module.class, "moduleManager");
-	private static final Logger log = LoggerFactory.getLogger(BaseModule.class);
+	protected static final Logger log = LoggerFactory.getLogger(BaseModule.class);
 	
 	private static final Listener defaultListener = new DefaultListener();
 	

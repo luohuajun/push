@@ -1,4 +1,4 @@
-package com.shinemo.mpush.common.zk.listener;
+package com.shinemo.mpush.zk.listener;
 
 import java.util.List;
 
@@ -16,12 +16,11 @@ import com.shinemo.mpush.common.container.ServerManage;
 import com.shinemo.mpush.tools.GenericsUtil;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.spi.ServiceContainer;
-import com.shinemo.mpush.tools.zk.ZkRegister;
-import com.shinemo.mpush.tools.zk.listener.DataChangeListener;
+import com.shinemo.mpush.zk.ZkManage;
 
 public abstract class AbstractDataChangeListener<T extends Application> extends DataChangeListener {
 	
-	protected static ZkRegister zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+	protected static ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class);
 	
 	private static final Logger log = LoggerFactory.getLogger(AbstractDataChangeListener.class);
 
@@ -49,9 +48,9 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 	}
 	
 	public void initData() {
-		log.warn(zkRegister.getClient().getNamespace()+" start init "+ this.getClass().getSimpleName()+" server data");
+		log.warn(zkManage.getClient().getNamespace()+" start init "+ this.getClass().getSimpleName()+" server data");
 		_initData();
-		log.warn(zkRegister.getClient().getNamespace()+" end init "+ this.getClass().getSimpleName()+" server data");
+		log.warn(zkManage.getClient().getNamespace()+" end init "+ this.getClass().getSimpleName()+" server data");
 	}
 	
 	public abstract String getRegisterPath();
@@ -62,7 +61,7 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 
 	private void _initData() {
 		// 获取机器列表
-		List<String> rawData = zkRegister.getChildrenKeys(getRegisterPath());
+		List<String> rawData = zkManage.getChildrenKeys(getRegisterPath());
 		for (String raw : rawData) {
 			String fullPath = getFullPath(raw);
 			T app = getServerApplication(fullPath,clazz);
@@ -83,7 +82,7 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 	}
 
 	private T getServerApplication(String fullPath,Class<T> clazz) {
-		String rawApp = zkRegister.get(fullPath);
+		String rawApp = zkManage.get(fullPath);
 		T app = Jsons.fromJson(rawApp,clazz);
 		return app;
 	}

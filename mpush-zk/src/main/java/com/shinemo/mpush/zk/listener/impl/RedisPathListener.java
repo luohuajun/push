@@ -1,4 +1,4 @@
-package com.shinemo.mpush.tools.zk.listener.impl;
+package com.shinemo.mpush.zk.listener.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +18,9 @@ import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.redis.RedisGroup;
 import com.shinemo.mpush.tools.redis.RedisRegister;
 import com.shinemo.mpush.tools.spi.ServiceContainer;
-import com.shinemo.mpush.tools.zk.ZKPath;
-import com.shinemo.mpush.tools.zk.ZkRegister;
-import com.shinemo.mpush.tools.zk.listener.DataChangeListener;
+import com.shinemo.mpush.zk.ZKPath;
+import com.shinemo.mpush.zk.ZkManage;
+import com.shinemo.mpush.zk.listener.DataChangeListener;
 
 /**
  * redis 监控
@@ -28,7 +28,7 @@ import com.shinemo.mpush.tools.zk.listener.DataChangeListener;
 public class RedisPathListener extends  DataChangeListener {
 	private static final Logger log = LoggerFactory.getLogger(RedisPathListener.class);
 
-	private final ZkRegister zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+	private final ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class);
 
 	private final RedisRegister redisRegister = ServiceContainer.getInstance(RedisRegister.class);
 	
@@ -50,7 +50,7 @@ public class RedisPathListener extends  DataChangeListener {
 
 	@SuppressWarnings("unchecked")
 	private List<RedisGroup> getRedisGroup(String fullPath) {
-		String rawGroup = zkRegister.get(fullPath);
+		String rawGroup = zkManage.get(fullPath);
 		if (Strings.isNullOrEmpty(rawGroup))
 			return Collections.EMPTY_LIST;
 		List<RedisGroup> group = Jsons.fromJsonToList(rawGroup, RedisGroup[].class);
