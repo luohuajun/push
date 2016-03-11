@@ -6,6 +6,7 @@ import org.apache.curator.utils.ZKPaths;
 public enum ZKPath {
     REDIS_SERVER("/redis", "machine", "redis注册的地方"),
     CONNECTION_SERVER("/cs/hosts", "machine", "connection server服务器应用注册的路径"),
+    ADMIN_SERVER("/admin/hosts", "machine", "admin server服务器应用注册的路径"),
     GATEWAY_SERVER("/gs/hosts", "machine", "gateway server服务器应用注册的路径");
 
     ZKPath(String path, String name, String desc) {
