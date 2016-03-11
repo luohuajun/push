@@ -2,9 +2,9 @@ package com.shinemo.mpush.common.container;
 
 import java.util.List;
 
-public class Light implements Lifecycle{
+public class Light implements LifeCycle{
 
-	private BaseLifecycle lifecycle = new BaseLifecycle(this);
+	private BaseLifeCycle lifecycle = new BaseLifeCycle(this);
 	
 	private String name;
 	
@@ -13,34 +13,34 @@ public class Light implements Lifecycle{
 	}
 	
 	@Override
-	public void addLifecycleListener(LifecycleListener listener) {
-		lifecycle.addLifecycleListener(listener);
+	public void addLifeCycleListener(LifeCycleListener listener) {
+		lifecycle.addLifeCycleListener(listener);
 	}
 
 	@Override
-	public List<LifecycleListener> getLifecycleListeners() {
+	public List<LifeCycleListener> getLifeCycleListeners() {
 		return lifecycle.getListeners();
 	}
 
 	@Override
 	public void start() {
-		lifecycle.fireLifecycleEvent(LifecyclePhase.BEFORE_START, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.BEFORE_START, null);
 		System.out.println("light " + this.getName() + ", start");
-		lifecycle.fireLifecycleEvent(LifecyclePhase.AFTER_START, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.AFTER_START, null);
 	}
 
 	@Override
 	public void stop() {
-		lifecycle.fireLifecycleEvent(LifecyclePhase.BEFORE_STOP, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP, null);
 		System.out.println("light " + this.getName() + ", stop");
-		lifecycle.fireLifecycleEvent(LifecyclePhase.AFTER_STOP, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP, null);
 	}
 
-	public BaseLifecycle getLifecycle() {
+	public BaseLifeCycle getLifecycle() {
 		return lifecycle;
 	}
 
-	public void setLifecycle(BaseLifecycle lifecycle) {
+	public void setLifecycle(BaseLifeCycle lifecycle) {
 		this.lifecycle = lifecycle;
 	}
 

@@ -1,37 +1,37 @@
 package com.shinemo.mpush.common.container;
 
-import com.shinemo.mpush.common.container.Lifecycle.LifecyclePhase;
+import com.shinemo.mpush.common.container.LifeCycle.LifeCyclePhase;
 
-public class LifecycleEvent {
+public class LifeCycleEvent {
 
 	//触发该事件的具体实例对象
-	private Lifecycle lifecycle;
+	private LifeCycle lifecycle;
 	
 	//事件类型
-	private Lifecycle.LifecyclePhase phase;
+	private LifeCycle.LifeCyclePhase phase;
 	
 	//事件携带的数据
 	private Object data;
 
-	public LifecycleEvent(Lifecycle lifecycle, LifecyclePhase phase, Object data) {
+	public LifeCycleEvent(LifeCycle lifecycle, LifeCyclePhase phase, Object data) {
 		this.lifecycle = lifecycle;
 		this.phase = phase;
 		this.data = data;
 	}
 
-	public Lifecycle getLifecycle() {
+	public LifeCycle getLifeCycle() {
 		return lifecycle;
 	}
 
-	public void setLifecycle(Lifecycle lifecycle) {
+	public void setLifecycle(LifeCycle lifecycle) {
 		this.lifecycle = lifecycle;
 	}
 
-	public Lifecycle.LifecyclePhase getPhase() {
+	public LifeCycle.LifeCyclePhase getPhase() {
 		return phase;
 	}
 
-	public void setPhase(Lifecycle.LifecyclePhase phase) {
+	public void setPhase(LifeCycle.LifeCyclePhase phase) {
 		this.phase = phase;
 	}
 

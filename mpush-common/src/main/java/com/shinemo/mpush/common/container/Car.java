@@ -2,41 +2,41 @@ package com.shinemo.mpush.common.container;
 
 import java.util.List;
 
-public class Car implements Lifecycle{
+public class Car implements LifeCycle{
 
 	private Light leftLight; //左大灯
 	private Light rightLight; //右大灯
 	
 	private Engine engine;
 	
-	private BaseLifecycle lifecycle = new BaseLifecycle(this);
+	private BaseLifeCycle lifecycle = new BaseLifeCycle(this);
 	
 	@Override
-	public void addLifecycleListener(LifecycleListener listener) {
-		lifecycle.addLifecycleListener(listener);
+	public void addLifeCycleListener(LifeCycleListener listener) {
+		lifecycle.addLifeCycleListener(listener);
 	}
 
 	@Override
-	public List<LifecycleListener> getLifecycleListeners() {
+	public List<LifeCycleListener> getLifeCycleListeners() {
 		return lifecycle.getListeners();
 	}
 
 	@Override
 	public void start() {
 		
-		lifecycle.fireLifecycleEvent(LifecyclePhase.BEFORE_START, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.BEFORE_START, null);
 		//先初始化其他组件
-		if(engine!=null&&engine instanceof Lifecycle){
+		if(engine!=null&&engine instanceof LifeCycle){
 			engine.start();
 		}
-		if(leftLight!=null&&leftLight instanceof Lifecycle){
+		if(leftLight!=null&&leftLight instanceof LifeCycle){
 			leftLight.start();
 		}
-		if(rightLight!=null&&rightLight instanceof Lifecycle){
+		if(rightLight!=null&&rightLight instanceof LifeCycle){
 			rightLight.start();
 		}
 		System.out.println("car start ...");
-		lifecycle.fireLifecycleEvent(LifecyclePhase.AFTER_START, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.AFTER_START, null);
 	
 	}
 
@@ -44,18 +44,18 @@ public class Car implements Lifecycle{
 	public void stop() {
 		
 		//先关闭其他组件
-		if(engine!=null&&engine instanceof Lifecycle){
+		if(engine!=null&&engine instanceof LifeCycle){
 			engine.stop();
 		}
-		if(leftLight!=null&&leftLight instanceof Lifecycle){
+		if(leftLight!=null&&leftLight instanceof LifeCycle){
 			leftLight.stop();
 		}
-		if(rightLight!=null&&rightLight instanceof Lifecycle){
+		if(rightLight!=null&&rightLight instanceof LifeCycle){
 			rightLight.stop();
 		}
-		lifecycle.fireLifecycleEvent(LifecyclePhase.BEFORE_STOP, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP, null);
 		System.out.println("car stop ...");
-		lifecycle.fireLifecycleEvent(LifecyclePhase.AFTER_STOP, null);
+		lifecycle.fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP, null);
 		
 	}
 
@@ -91,11 +91,11 @@ public class Car implements Lifecycle{
 		car.setLeftLight(leftLight);
 		car.setRightLight(rightLight);
 		car.setEngine(engine);
-		engine.addLifecycleListener(new LifecycleListener() {
+		engine.addLifeCycleListener(new LifeCycleListener() {
 			
 			@Override
-			public void lifecycleEvent(LifecycleEvent event) {
-				if(Lifecycle.LifecyclePhase.AFTER_START.equals(event.getPhase())){
+			public void lifeCycleEvent(LifeCycleEvent event) {
+				if(LifeCycle.LifeCyclePhase.AFTER_START.equals(event.getPhase())){
 					System.out.println("监听到发动机启动了，轰轰轰。。。");
 				}else{
 					System.out.println("engine:"+event.getPhase());
@@ -103,11 +103,11 @@ public class Car implements Lifecycle{
 			}
 		});
 		
-		car.addLifecycleListener(new LifecycleListener() {
+		car.addLifeCycleListener(new LifeCycleListener() {
 			
 			@Override
-			public void lifecycleEvent(LifecycleEvent event) {
-				if(Lifecycle.LifecyclePhase.AFTER_STOP.equals(event.getPhase())){
+			public void lifeCycleEvent(LifeCycleEvent event) {
+				if(LifeCycle.LifeCyclePhase.AFTER_STOP.equals(event.getPhase())){
 					System.out.println("car 快停止了，下车吧。。。");
 				}else{
 					System.out.println("car:"+event.getPhase());
