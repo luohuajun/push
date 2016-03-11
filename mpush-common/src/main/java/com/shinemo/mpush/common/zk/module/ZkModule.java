@@ -1,46 +1,21 @@
 package com.shinemo.mpush.common.zk.module;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.shinemo.mpush.common.container.BaseModule;
+import com.shinemo.mpush.common.container.BaseLifeCycle;
 import com.shinemo.mpush.common.spi.ServiceContainer;
 import com.shinemo.mpush.common.zk.ZkManage;
 
-public class ZkModule extends  BaseModule{
+public class ZkModule extends  BaseLifeCycle{
 
 	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage"); 
 	
-	private AtomicBoolean startFlag = new AtomicBoolean();
-	private AtomicBoolean stopFlag = new AtomicBoolean();
-	
-	public ZkModule(Listener listener) {
-		super(listener);
-	}
-	
-	public ZkModule() {
-		this(null);
+	@Override
+	public void start0() {
+		zkManage.init();
 	}
 
 	@Override
-	public void start(Listener listener) {
-		if(startFlag.compareAndSet(false, true)){
-			zkManage.init();
-			if(listener!=null){
-				listener.onSuccess(this);
-			}
-		}else{
-			log.error("module has start:{}",this.getClass().getSimpleName());
-		}
-	}
-
-	@Override
-	public void stop(Listener listener) {
-		if(stopFlag.compareAndSet(false, true)){
-			zkManage.close();
-		}else{
-			log.error("module has stop:{}",this.getClass().getSimpleName());
-		}
-		
+	public void stop0() {
+		zkManage.close();
 	}
 
 }
