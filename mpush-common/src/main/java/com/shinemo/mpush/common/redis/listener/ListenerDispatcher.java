@@ -14,19 +14,15 @@ import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public class ListenerDispatcher implements MessageListener {
 
-    public static final ListenerDispatcher INSTANCE = new ListenerDispatcher();
-
     private Map<String, List<MessageListener>> subscribes = Maps.newTreeMap();
     
-    private ListenerDispatcher(){}
-
     private Executor executor = ThreadPoolManager.redisExecutor;
 
     @Override
     public void onMessage(final String channel, final String message) {
         List<MessageListener> listeners = subscribes.get(channel);
         if (listeners == null) {
-        	LoggerManage.info(LogType.REDIS, "cannot find listener:%s,%s", channel,message);
+        	LoggerManage.info(LogType.REDIS, "cannot find listener:{},{}", channel,message);
             return;
         }
         for (final MessageListener listener : listeners) {

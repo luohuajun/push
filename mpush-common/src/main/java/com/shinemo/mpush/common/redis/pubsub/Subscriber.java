@@ -1,6 +1,7 @@
 package com.shinemo.mpush.common.redis.pubsub;
 
-import com.shinemo.mpush.common.redis.listener.ListenerDispatcher;
+import com.shinemo.mpush.common.redis.listener.MessageListener;
+import com.shinemo.mpush.common.spi.ServiceContainer;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.tools.Jsons;
@@ -9,7 +10,7 @@ import redis.clients.jedis.JedisPubSub;
 
 public class Subscriber extends JedisPubSub {
 
-    private static ListenerDispatcher dispatcher = ListenerDispatcher.INSTANCE;
+    private MessageListener dispatcher = ServiceContainer.getInstance(MessageListener.class, "listenerDispatcher");
     
     public static Subscriber holder = new Subscriber();
     
