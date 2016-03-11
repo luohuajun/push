@@ -1,4 +1,4 @@
-package com.shinemo.mpush.common.app;
+package com.shinemo.mpush.common;
 
 
 /**
