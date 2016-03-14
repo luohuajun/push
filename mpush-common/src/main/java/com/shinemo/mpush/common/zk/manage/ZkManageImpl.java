@@ -20,7 +20,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.ACL;
 
-import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.zk.ZkConfig;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;
@@ -50,8 +49,7 @@ public class ZkManageImpl implements ZkManage{
 	 * 初始化
 	 */
 	@Override
-	public void init() {
-		zkConfig = new ZkConfig(ConfigCenter.holder.zkIp(), ConfigCenter.holder.zkNamespace(),ConfigCenter.holder.zkDigest());
+	public void init(ZkConfig zkConfig) {
 		LoggerManage.info(LogType.ZK, "start registry zk, server lists is:{}", zkConfig.getIpLists());
 		Builder builder = CuratorFrameworkFactory.builder().connectString(zkConfig.getIpLists())
 				.retryPolicy(new ExponentialBackoffRetry(zkConfig.getMinTime(), zkConfig.getMaxRetry(), zkConfig.getMaxTime())).namespace(zkConfig.getNamespace());

@@ -12,7 +12,7 @@ import com.shinemo.mpush.common.zk.listener.DataChangeListener;
 @SPI("zkManage")
 public interface ZkManage {
 
-	public void init();
+	public void init(ZkConfig config);
 
 	public void close();
 
@@ -36,10 +36,10 @@ public interface ZkManage {
 
 	public CuratorFramework getClient();
 
-	public ZkConfig getZkConfig();
-
 	public TreeCache getCache();
 
 	public void registerListener(DataChangeListener listener);
+
+	public ZkConfig getZkConfig();
 	
 }

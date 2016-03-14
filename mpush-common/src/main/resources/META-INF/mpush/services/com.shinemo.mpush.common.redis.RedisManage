@@ -1,0 +1,1 @@
+redisManage=com.shinemo.mpush.common.redis.manage.RedisManageImpl
