@@ -50,6 +50,7 @@ public class ZkManageImpl implements ZkManage{
 	 */
 	@Override
 	public void init(ZkConfig zkConfig) {
+		this.zkConfig = zkConfig;
 		LoggerManage.info(LogType.ZK, "start registry zk, server lists is:{}", zkConfig.getIpLists());
 		Builder builder = CuratorFrameworkFactory.builder().connectString(zkConfig.getIpLists())
 				.retryPolicy(new ExponentialBackoffRetry(zkConfig.getMinTime(), zkConfig.getMaxRetry(), zkConfig.getMaxTime())).namespace(zkConfig.getNamespace());

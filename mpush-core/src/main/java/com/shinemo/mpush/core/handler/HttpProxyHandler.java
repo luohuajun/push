@@ -4,7 +4,6 @@ import com.google.common.base.Strings;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.common.dns.DnsMapping;
-import com.shinemo.mpush.common.dns.manage.DnsMappingManage;
 import com.shinemo.mpush.common.message.BaseMessageHandler;
 import com.shinemo.mpush.common.message.domain.HttpRequestMessage;
 import com.shinemo.mpush.common.message.domain.HttpResponseMessage;
@@ -186,7 +185,8 @@ public class HttpProxyHandler extends BaseMessageHandler<HttpRequestMessage> {
         }
         if (uri == null) return url;
         String host = uri.getHost();
-        DnsMapping mapping = DnsMappingManage.holder.translate(host);
+//        DnsMapping mapping = DnsMappingManage.holder.translate(host);
+        DnsMapping mapping = null;
         if (mapping == null) return url;
         return url.replaceFirst(host, mapping.toString());
     }

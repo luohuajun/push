@@ -55,7 +55,7 @@ public abstract class AbstractServer<T extends Application> {
 
 	//step1 启动 zk
 	private void initZK(){
-    	zkRegister.init();
+//    	zkRegister.init();
 	}
 	
 	//step2 获取redis

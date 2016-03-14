@@ -23,6 +23,10 @@
           <groupId>org.codehaus.janino</groupId>
           <artifactId>janino</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.shinemo.mpush</groupId>
+            <artifactId>mpush-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

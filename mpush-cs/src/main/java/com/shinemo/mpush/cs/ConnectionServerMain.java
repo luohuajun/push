@@ -6,7 +6,6 @@ import com.shinemo.mpush.api.RedisKey;
 import com.shinemo.mpush.api.Server;
 import com.shinemo.mpush.common.AbstractServer;
 import com.shinemo.mpush.common.config.ConfigCenter;
-import com.shinemo.mpush.common.dns.manage.DnsMappingManage;
 import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.conn.client.GatewayServerApplication;
@@ -46,7 +45,7 @@ public class ConnectionServerMain extends AbstractServer<ConnectionServerApplica
 		startServer(adminServer);
 		
 		RedisManageUtil.del(RedisKey.getUserOnlineKey(MPushUtil.getExtranetIp()));
-		DnsMappingManage.holder.init();
+//		DnsMappingManage.holder.init();
 		
 	}
 	

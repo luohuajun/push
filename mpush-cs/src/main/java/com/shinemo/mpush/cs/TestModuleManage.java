@@ -6,20 +6,16 @@ import org.slf4j.LoggerFactory;
 import com.shinemo.mpush.api.container.LifeCycle.LifeCyclePhase;
 import com.shinemo.mpush.api.container.LifeCycleEvent;
 import com.shinemo.mpush.api.container.LifeCycleListener;
-import com.shinemo.mpush.common.admin.module.AdminServerModule;
 import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
-import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.dns.module.DnsModule;
-import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.module.ZkModule;
 import com.shinemo.mpush.monitor.service.MonitorDataCollector;
-import com.shinemo.mpush.tools.Jsons;
 
-public class ModuleManage {
+public class TestModuleManage {
 	
-	private static final Logger log = LoggerFactory.getLogger(ModuleManage.class);
+	private static final Logger log = LoggerFactory.getLogger(TestModuleManage.class);
 	
 	private ZkModule zkModule = new ZkModule();
 	
@@ -37,7 +33,7 @@ public class ModuleManage {
 	
 	private LifeCycleListener defaultLifeCycleListener = new DefaultLifeCyclyListener();
 	
-	public ModuleManage() {
+	public TestModuleManage() {
 		zkModule.addLifeCycleListener(defaultLifeCycleListener);
 		redisModule.addLifeCycleListener(defaultLifeCycleListener);
 		configCenterModule.addLifeCycleListener(defaultLifeCycleListener);
@@ -52,7 +48,7 @@ public class ModuleManage {
 		@Override
 		public void lifeCycleEvent(LifeCycleEvent event) {
 			
-			log.error(" default life cycle:"+Jsons.toJson(event));
+			log.error(" default life cycle:{},{}",event.getPhase().name(),event.getLifeCycle().getClass().getSimpleName());
 			
 			if(event.getPhase().equals(LifeCyclePhase.BEFORE_START)){
 				
@@ -88,7 +84,7 @@ public class ModuleManage {
 	}
 	
 	public static void main(String[] args) {
-		final ModuleManage moduleManage = new ModuleManage();
+		final TestModuleManage moduleManage = new TestModuleManage();
 		moduleManage.start();
 		
 		//开启监控
