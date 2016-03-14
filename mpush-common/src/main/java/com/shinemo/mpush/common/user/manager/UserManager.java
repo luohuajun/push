@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.api.RedisKey;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 //查询使用
 public final class UserManager {
@@ -21,22 +21,22 @@ public final class UserManager {
     }
 
     public void clearUserOnlineData() {
-        RedisManage.del(ONLINE_KEY);
+        RedisManageUtil.del(ONLINE_KEY);
     }
 
     public void recordUserOnline(String userId) {
-        RedisManage.zAdd(ONLINE_KEY, userId);
+    	RedisManageUtil.zAdd(ONLINE_KEY, userId);
         log.info("user online {}", userId);
     }
 
     public void recordUserOffline(String userId) {
-        RedisManage.zRem(ONLINE_KEY, userId);
+    	RedisManageUtil.zRem(ONLINE_KEY, userId);
         log.info("user offline {}", userId);
     }
 
     //在线用户
     public long getOnlineUserNum() {
-        return RedisManage.zCard(ONLINE_KEY);
+        return RedisManageUtil.zCard(ONLINE_KEY);
     }
 
     //在线用户列表
@@ -44,6 +44,6 @@ public final class UserManager {
         if (size < 10) {
             size = 10;
         }
-        return RedisManage.zrange(ONLINE_KEY, start, size - 1, String.class);
+        return RedisManageUtil.zrange(ONLINE_KEY, start, size - 1, String.class);
     }
 }

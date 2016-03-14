@@ -1,4 +1,4 @@
-package com.shinemo.mpush.tools.config;
+package com.shinemo.mpush.common.config;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
-import com.shinemo.mpush.tools.dns.DnsMapping;
+import com.shinemo.mpush.common.dns.DnsMapping;
 
 public class DnsMappingConverter  implements Converter<Map<String, List<DnsMapping>>>{
 

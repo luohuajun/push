@@ -1,7 +1,7 @@
 package com.shinemo.mpush.netty.client;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.shinemo.mpush.tools.config.ConfigCenter;
+import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.tools.thread.NamedThreadFactory;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 

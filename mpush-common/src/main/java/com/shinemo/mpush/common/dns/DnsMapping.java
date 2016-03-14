@@ -1,4 +1,4 @@
-package com.shinemo.mpush.tools.dns;
+package com.shinemo.mpush.common.dns;
 
 
 public class DnsMapping {

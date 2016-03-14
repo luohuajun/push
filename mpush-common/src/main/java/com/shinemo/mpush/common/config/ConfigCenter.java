@@ -1,8 +1,8 @@
-package com.shinemo.mpush.tools.config;
+package com.shinemo.mpush.common.config;
 
 
-import com.shinemo.mpush.tools.dns.DnsMapping;
-import com.shinemo.mpush.tools.redis.RedisGroup;
+import com.shinemo.mpush.common.dns.DnsMapping;
+import com.shinemo.mpush.common.redis.RedisGroup;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;

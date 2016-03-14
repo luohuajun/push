@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.shinemo.mpush.api.Client;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.netty.util.NettySharedHolder;
-import com.shinemo.mpush.tools.config.ConfigCenter;
 
 public  class NettyClient implements Client {
 	

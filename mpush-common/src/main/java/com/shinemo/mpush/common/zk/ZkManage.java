@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCache;
 
-import com.shinemo.mpush.common.spi.SPI;
+import com.shinemo.mpush.api.spi.SPI;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;
 
 

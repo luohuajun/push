@@ -4,11 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.common.AbstractEventContainer;
+import com.shinemo.mpush.common.config.ConfigCenter;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
+import com.shinemo.mpush.common.redis.listener.ListenerDispatcher;
+import com.shinemo.mpush.common.redis.listener.MessageListener;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.config.ConfigCenter;
-import com.shinemo.mpush.tools.redis.listener.ListenerDispatcher;
-import com.shinemo.mpush.tools.redis.listener.MessageListener;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 /**
  * Created by ohun on 2016/1/4.
@@ -24,8 +24,8 @@ public class UserChangeListener extends AbstractEventContainer implements Messag
     //只需要一台机器注册online、offline 消息通道
     public UserChangeListener() {
     	if(ConfigCenter.holder.onlineAndOfflineListenerIp().equals(MPushUtil.getLocalIp())){
-    		ListenerDispatcher.INSTANCE.subscribe(getOnlineChannel(), this);
-    		ListenerDispatcher.INSTANCE.subscribe(getOfflineChannel(), this);
+//    		ListenerDispatcher.INSTANCE.subscribe(getOnlineChannel(), this);
+//    		ListenerDispatcher.INSTANCE.subscribe(getOfflineChannel(), this);
     	}else{
     		log.error("UserChangeListener is not localhost,required:{},but:{}",ConfigCenter.holder.onlineAndOfflineListenerIp(),MPushUtil.getLocalIp());
     	}
@@ -40,11 +40,11 @@ public class UserChangeListener extends AbstractEventContainer implements Messag
     }
     
     public void userOnline(String userId) {
-        RedisManage.publish(getOnlineChannel(), userId);
+        RedisManageUtil.publish(getOnlineChannel(), userId);
     }
     
     public void userOffline(String userId){
-    	RedisManage.publish(getOnlineChannel(), userId);
+    	RedisManageUtil.publish(getOnlineChannel(), userId);
     }
 
     @Override

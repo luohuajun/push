@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
-import com.shinemo.mpush.common.container.ServerManage;
+import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 
 public class ConnectionServerManage implements ServerManage<ConnectionServerApplication>{

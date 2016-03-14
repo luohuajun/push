@@ -3,8 +3,6 @@ package com.shinemo.mpush.cs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.shinemo.mpush.monitor.service.MonitorDataCollector;
-import com.shinemo.mpush.tools.config.ConfigCenter;
 
 public class Main {
 	
@@ -15,7 +13,7 @@ public class Main {
 		connectionServerMain.start();
 		
 		//开启监控
-		MonitorDataCollector.start(ConfigCenter.holder.skipDump());
+//		MonitorDataCollector.start(ConfigCenter.holder.skipDump());
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {

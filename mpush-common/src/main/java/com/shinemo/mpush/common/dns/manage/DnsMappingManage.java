@@ -1,4 +1,4 @@
-package com.shinemo.mpush.tools.dns.manage;
+package com.shinemo.mpush.common.dns.manage;
 
 import java.util.List;
 import java.util.Map;
@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.shinemo.mpush.common.config.ConfigCenter;
+import com.shinemo.mpush.common.dns.DnsMapping;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.config.ConfigCenter;
-import com.shinemo.mpush.tools.dns.DnsMapping;
 
 public class DnsMappingManage {
 	

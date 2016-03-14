@@ -4,7 +4,6 @@ import org.apache.commons.net.telnet.TelnetClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.shinemo.mpush.tools.config.ConfigCenter;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -41,12 +40,12 @@ public final class MPushUtil {
         return LOCAL_IP;
     }
 
-    public static int getHeartbeat(int min, int max) {
-        return Math.max(
-        		ConfigCenter.holder.minHeartbeat(),
-                Math.min(max, ConfigCenter.holder.maxHeartbeat())
-        );
-    }
+//    public static int getHeartbeat(int min, int max) {
+//        return Math.max(
+//        		ConfigCenter.holder.minHeartbeat(),
+//                Math.min(max, ConfigCenter.holder.maxHeartbeat())
+//        );
+//    }
 
     /**
      * 获取本机ip

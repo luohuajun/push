@@ -7,7 +7,7 @@ import java.util.Set;
 import redis.clients.jedis.JedisPubSub;
 
 import com.google.common.collect.Sets;
-import com.shinemo.mpush.common.spi.ServiceContainer;
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.tools.Jsons;
 
 

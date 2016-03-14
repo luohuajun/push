@@ -14,9 +14,9 @@ import org.apache.curator.framework.recipes.cache.TreeCacheEvent.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.redis.RedisGroup;
 import com.shinemo.mpush.common.redis.RedisManage;
-import com.shinemo.mpush.common.spi.ServiceContainer;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;

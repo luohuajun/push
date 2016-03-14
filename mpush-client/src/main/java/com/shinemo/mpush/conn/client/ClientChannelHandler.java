@@ -20,6 +20,7 @@ import com.shinemo.mpush.common.message.domain.HttpRequestMessage;
 import com.shinemo.mpush.common.message.domain.KickUserMessage;
 import com.shinemo.mpush.common.message.domain.OkMessage;
 import com.shinemo.mpush.common.message.domain.PushMessage;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.common.security.AesCipher;
 import com.shinemo.mpush.common.security.CipherBox;
 import com.shinemo.mpush.netty.client.ChannelClientHandler;
@@ -27,7 +28,6 @@ import com.shinemo.mpush.netty.client.NettyClient;
 import com.shinemo.mpush.netty.client.NettyClientFactory;
 import com.shinemo.mpush.netty.client.SecurityNettyClient;
 import com.shinemo.mpush.netty.connection.NettyConnection;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -208,12 +208,12 @@ public final class ClientChannelHandler extends ChannelHandlerAdapter implements
         map.put("expireTime", expireTime + "");
         map.put("cipherStr", client.getConnection().getSessionContext().cipher.toString());
         String key = RedisKey.getDeviceIdKey(client.getDeviceId());
-        RedisManage.set(key, map, 60 * 5); //5分钟
+        RedisManageUtil.set(key, map, 60 * 5); //5分钟
     }
 
     private Map<String, String> getFastConnectionInfo(String deviceId) {
         String key = RedisKey.getDeviceIdKey(deviceId);
-        return RedisManage.get(key, Map.class);
+        return RedisManageUtil.get(key, Map.class);
     }
 
     private void handshake(SecurityNettyClient client) {

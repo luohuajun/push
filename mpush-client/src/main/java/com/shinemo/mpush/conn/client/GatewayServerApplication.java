@@ -1,9 +1,9 @@
 package com.shinemo.mpush.conn.client;
 
-import com.shinemo.mpush.common.app.Application;
+import com.shinemo.mpush.common.Application;
+import com.shinemo.mpush.common.config.ConfigCenter;
+import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.config.ConfigCenter;
-import com.shinemo.mpush.tools.zk.ZKPath;
 
 
 public class GatewayServerApplication extends Application{

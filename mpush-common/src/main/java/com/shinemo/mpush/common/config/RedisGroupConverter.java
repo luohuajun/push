@@ -1,4 +1,4 @@
-package com.shinemo.mpush.tools.config;
+package com.shinemo.mpush.common.config;
 
 import java.lang.reflect.Method;
 
@@ -6,8 +6,9 @@ import org.aeonbits.owner.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.shinemo.mpush.tools.redis.RedisGroup;
-import com.shinemo.mpush.tools.redis.RedisNode;
+import com.shinemo.mpush.common.redis.RedisGroup;
+import com.shinemo.mpush.common.redis.RedisNode;
+
 
 public class RedisGroupConverter implements Converter<RedisGroup>{
 

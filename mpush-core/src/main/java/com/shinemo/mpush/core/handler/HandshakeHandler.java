@@ -63,7 +63,9 @@ public final class HandshakeHandler extends BaseMessageHandler<HandshakeMessage>
         ReusableSession session = ReusableSessionManager.INSTANCE.genSession(context);
 
         //5.计算心跳时间
-        int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
+//        int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
+        
+        int heartbeat = 1000;
 
         //6.响应握手成功消息
         HandshakeOkMessage

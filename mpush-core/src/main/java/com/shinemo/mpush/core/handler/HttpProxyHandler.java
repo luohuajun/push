@@ -3,6 +3,8 @@ package com.shinemo.mpush.core.handler;
 import com.google.common.base.Strings;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;
+import com.shinemo.mpush.common.dns.DnsMapping;
+import com.shinemo.mpush.common.dns.manage.DnsMappingManage;
 import com.shinemo.mpush.common.message.BaseMessageHandler;
 import com.shinemo.mpush.common.message.domain.HttpRequestMessage;
 import com.shinemo.mpush.common.message.domain.HttpResponseMessage;
@@ -12,10 +14,10 @@ import com.shinemo.mpush.netty.client.HttpCallback;
 import com.shinemo.mpush.netty.client.HttpClient;
 import com.shinemo.mpush.netty.client.RequestInfo;
 import com.shinemo.mpush.tools.Profiler;
-import com.shinemo.mpush.tools.dns.DnsMapping;
-import com.shinemo.mpush.tools.dns.manage.DnsMappingManage;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.*;
+
 import org.slf4j.Logger;
 
 import java.net.InetSocketAddress;

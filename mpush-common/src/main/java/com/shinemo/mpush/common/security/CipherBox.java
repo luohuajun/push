@@ -1,6 +1,6 @@
 package com.shinemo.mpush.common.security;
 
-import com.shinemo.mpush.tools.config.ConfigCenter;
+import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.tools.crypto.RSAUtils;
 
 import java.security.SecureRandom;

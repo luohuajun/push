@@ -9,14 +9,13 @@ import com.shinemo.mpush.api.router.ClientLocation;
 import com.shinemo.mpush.api.router.Router;
 import com.shinemo.mpush.common.AbstractEventContainer;
 import com.shinemo.mpush.common.message.domain.KickUserMessage;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
+import com.shinemo.mpush.common.redis.listener.MessageListener;
 import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.redis.listener.ListenerDispatcher;
-import com.shinemo.mpush.tools.redis.listener.MessageListener;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -29,7 +28,7 @@ public final class RouterChangeListener extends AbstractEventContainer implement
     private final String kick_channel = KICK_CHANNEL_ + MPushUtil.getLocalIp();
 
     public RouterChangeListener() {
-        ListenerDispatcher.INSTANCE.subscribe(getKickChannel(), this);
+//        ListenerDispatcher.INSTANCE.subscribe(getKickChannel(), this);
     }
 
     public String getKickChannel() {
@@ -98,7 +97,7 @@ public final class RouterChangeListener extends AbstractEventContainer implement
         msg.deviceId = location.getDeviceId();
         msg.targetServer = location.getHost();
         msg.userId = userId;
-        RedisManage.publish(getKickChannel(msg.targetServer), msg);
+        RedisManageUtil.publish(getKickChannel(msg.targetServer), msg);
     }
 
     /**
@@ -147,6 +146,6 @@ public final class RouterChangeListener extends AbstractEventContainer implement
     }
 
     private void remStatUser(String userId) {
-        RedisManage.zRem(RedisKey.getUserOnlineKey(MPushUtil.getExtranetIp()), userId);
+    	RedisManageUtil.zRem(RedisKey.getUserOnlineKey(MPushUtil.getExtranetIp()), userId);
     }
 }

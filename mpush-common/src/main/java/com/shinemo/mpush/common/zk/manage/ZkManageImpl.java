@@ -20,6 +20,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.ACL;
 
+import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.zk.ZkConfig;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;
@@ -27,7 +28,6 @@ import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.config.ConfigCenter;
 
 public class ZkManageImpl implements ZkManage{
 	

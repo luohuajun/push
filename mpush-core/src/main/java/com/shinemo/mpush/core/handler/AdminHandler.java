@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.api.RedisKey;
+import com.shinemo.mpush.api.spi.ServiceContainer;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
+import com.shinemo.mpush.common.zk.ZKPath;
+import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -29,7 +31,7 @@ public final class AdminHandler extends SimpleChannelInboundHandler<String> {
 	
 	private static final String ONE_END = "\r\n";
 	
-	protected static final  zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+	protected static final ZkManage  zkRegister = ServiceContainer.getInstance(ZkManage.class);
 	
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, String request) throws Exception {
@@ -76,7 +78,7 @@ public final class AdminHandler extends SimpleChannelInboundHandler<String> {
 		SCN("scn"){
 			@Override
 			public String handler(String request) {
-				Long value = RedisManage.zCard(RedisKey.getUserOnlineKey(MPushUtil.getExtranetAddress()));
+				Long value = RedisManageUtil.zCard(RedisKey.getUserOnlineKey(MPushUtil.getExtranetAddress()));
 				if(value == null){
 					value = 0L;
 				}

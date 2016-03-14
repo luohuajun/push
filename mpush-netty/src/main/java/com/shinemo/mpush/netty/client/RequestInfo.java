@@ -2,7 +2,8 @@ package com.shinemo.mpush.netty.client;
 
 import com.google.common.primitives.Ints;
 import com.shinemo.mpush.api.Constants;
-import com.shinemo.mpush.tools.config.ConfigCenter;
+import com.shinemo.mpush.common.config.ConfigCenter;
+
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import io.netty.util.Timeout;

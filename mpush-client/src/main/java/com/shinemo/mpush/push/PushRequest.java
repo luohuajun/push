@@ -4,13 +4,13 @@ import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.PushSender;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.router.ClientLocation;
-import com.shinemo.mpush.common.container.ServerManage;
+import com.shinemo.mpush.api.spi.ServiceContainer;
+import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.message.domain.GatewayPushMessage;
 import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.common.router.manager.ConnectionRouterManager;
 import com.shinemo.mpush.push.manage.impl.GatewayServerManage;
 import com.shinemo.mpush.tools.Jsons;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;

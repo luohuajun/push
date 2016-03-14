@@ -4,8 +4,8 @@ import com.google.common.eventbus.Subscribe;
 import com.shinemo.mpush.api.event.UserOfflineEvent;
 import com.shinemo.mpush.api.event.UserOnlineEvent;
 import com.shinemo.mpush.common.EventBus;
+import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.common.user.manager.UserManager;
-import com.shinemo.mpush.tools.redis.manage.RedisManage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +27,12 @@ public final class UserOnlineOfflineListener {
     @Subscribe
     void onUserOnline(UserOnlineEvent event) {
         UserManager.INSTANCE.recordUserOnline(event.getUserId());
-        RedisManage.publish(ONLINE_CHANNEL, event.getUserId());
+        RedisManageUtil.publish(ONLINE_CHANNEL, event.getUserId());
     }
 
     @Subscribe
     void onUserOffline(UserOfflineEvent event) {
         UserManager.INSTANCE.recordUserOffline(event.getUserId());
-        RedisManage.publish(OFFLINE_CHANNEL, event.getUserId());
+        RedisManageUtil.publish(OFFLINE_CHANNEL, event.getUserId());
     }
 }

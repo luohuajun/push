@@ -1,7 +1,7 @@
 package com.shinemo.mpush.common.zk.module;
 
-import com.shinemo.mpush.common.container.BaseLifeCycle;
-import com.shinemo.mpush.common.spi.ServiceContainer;
+import com.shinemo.mpush.api.container.BaseLifeCycle;
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.zk.ZkManage;
 
 public class ZkModule extends  BaseLifeCycle{

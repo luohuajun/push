@@ -41,8 +41,10 @@ public final class FastConnectHandler extends BaseMessageHandler<FastConnectMess
             LoggerManage.info(LogType.CONNECTION, "fast connect failure, not the same device, deviceId={}, session={}", message.deviceId, session.context);
         } else {
             //3.校验成功，重新计算心跳，完成快速重连
-            int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
+//            int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
 
+            int heartbeat = 1000;
+            
             session.context.setHeartbeat(heartbeat);
             message.getConnection().setSessionContext(session.context);
 

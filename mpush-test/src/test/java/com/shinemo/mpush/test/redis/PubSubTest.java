@@ -7,12 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.redis.RedisGroup;
 import com.shinemo.mpush.common.redis.RedisManage;
 import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.common.redis.RedisNode;
 import com.shinemo.mpush.common.redis.pubsub.Subscriber;
-import com.shinemo.mpush.common.spi.ServiceContainer;
 
 public class PubSubTest {
 	

@@ -3,7 +3,8 @@ package com.shinemo.mpush.netty.codec;
 import com.shinemo.mpush.api.exception.DecodeException;
 import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.api.protocol.Packet;
-import com.shinemo.mpush.tools.config.ConfigCenter;
+import com.shinemo.mpush.common.config.ConfigCenter;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;

@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.tools.JVMUtil;
-import com.shinemo.mpush.tools.config.ConfigCenter;
 
 public class IgnoreRunsPolicy implements RejectedExecutionHandler{
 
@@ -16,7 +15,7 @@ public class IgnoreRunsPolicy implements RejectedExecutionHandler{
 
 	private volatile boolean dump = false;
 	
-	private static final String preFixPath = ConfigCenter.holder.logPath();
+	private static final String preFixPath = "";
 	
 	private final ThreadPoolContext context;
 	

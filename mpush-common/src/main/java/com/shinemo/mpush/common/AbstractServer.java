@@ -9,12 +9,15 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.shinemo.mpush.api.Server;
-import com.shinemo.mpush.common.app.Application;
+import com.shinemo.mpush.api.spi.ServiceContainer;
+import com.shinemo.mpush.common.config.ConfigCenter;
+import com.shinemo.mpush.common.redis.RedisGroup;
+import com.shinemo.mpush.common.zk.ZKPath;
+import com.shinemo.mpush.common.zk.ZkManage;
+import com.shinemo.mpush.common.zk.listener.DataChangeListener;
+import com.shinemo.mpush.common.zk.listener.impl.RedisPathListener;
 import com.shinemo.mpush.tools.GenericsUtil;
 import com.shinemo.mpush.tools.Jsons;
-import com.shinemo.mpush.tools.config.ConfigCenter;
-import com.shinemo.mpush.tools.redis.RedisGroup;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public abstract class AbstractServer<T extends Application> {
@@ -25,7 +28,7 @@ public abstract class AbstractServer<T extends Application> {
     
     protected List<DataChangeListener> dataChangeListeners = Lists.newArrayList();
     
-    protected ZkRegister zkRegister = ServiceContainer.getInstance(ZkRegister.class);
+    protected ZkManage zkRegister = ServiceContainer.getInstance(ZkManage.class);
     
     protected Server server;
     

@@ -1,6 +1,7 @@
 package com.shinemo.mpush.test.spi.test;
 
-import com.shinemo.mpush.common.spi.SPI;
+import com.shinemo.mpush.api.spi.SPI;
+
 
 
 

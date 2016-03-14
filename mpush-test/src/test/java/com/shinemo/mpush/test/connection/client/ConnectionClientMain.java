@@ -3,11 +3,11 @@ package com.shinemo.mpush.test.connection.client;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.AbstractClient;
-import com.shinemo.mpush.common.container.ServerManage;
+import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.push.zk.listener.impl.ConnectionServerPathListener;
-import com.shinemo.mpush.tools.spi.ServiceContainer;
 
 public class ConnectionClientMain extends AbstractClient {
 

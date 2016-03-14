@@ -1,8 +1,8 @@
-package com.shinemo.mpush.common.container;
+package com.shinemo.mpush.common;
 
 import java.util.Collection;
 
-import com.shinemo.mpush.common.spi.SPI;
+import com.shinemo.mpush.api.spi.SPI;
 
 
 @SPI("connectionServerManage")

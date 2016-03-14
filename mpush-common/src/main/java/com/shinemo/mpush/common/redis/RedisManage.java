@@ -2,7 +2,8 @@ package com.shinemo.mpush.common.redis;
 
 import java.util.List;
 
-import com.shinemo.mpush.common.spi.SPI;
+import com.shinemo.mpush.api.spi.SPI;
+
 
 
 @SPI("redisManage")

@@ -1,7 +1,7 @@
 package com.shinemo.mpush.common.redis.pubsub;
 
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.redis.listener.MessageListener;
-import com.shinemo.mpush.common.spi.ServiceContainer;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 import com.shinemo.mpush.tools.Jsons;

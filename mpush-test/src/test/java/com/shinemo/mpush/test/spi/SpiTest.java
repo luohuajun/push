@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.shinemo.mpush.common.spi.ServiceContainer;
+import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.test.spi.test.TestService;
 
 
