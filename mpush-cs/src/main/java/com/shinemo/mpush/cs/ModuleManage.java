@@ -1,5 +1,8 @@
 package com.shinemo.mpush.cs;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.shinemo.mpush.common.admin.module.AdminServerModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.container.LifeCycleEvent;
@@ -9,9 +12,12 @@ import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.module.ZkModule;
 import com.shinemo.mpush.monitor.service.MonitorDataCollector;
+import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.config.ConfigCenter;
 
 public class ModuleManage {
+	
+	private static final Logger log = LoggerFactory.getLogger(ModuleManage.class);
 	
 	private ZkModule zkModule = new ZkModule();
 	
@@ -22,8 +28,6 @@ public class ModuleManage {
 	private GatewayServerModule gatewayServerModule = new GatewayServerModule();
 	
 	private AdminServerModule adminServerModule = new AdminServerModule();
-
-	
 	
 	private LifeCycleListener defaultLifeCycleListener = new DefaultLifeCyclyListener();
 	
@@ -39,6 +43,9 @@ public class ModuleManage {
 		
 		@Override
 		public void lifeCycleEvent(LifeCycleEvent event) {
+			
+			log.error(" default life cycle:"+Jsons.toJson(event));
+			
 			if(event.getPhase().equals(LifeCyclePhase.BEFORE_START)){
 				
 			}else if(event.getPhase().equals(LifeCyclePhase.AFTER_START)){
