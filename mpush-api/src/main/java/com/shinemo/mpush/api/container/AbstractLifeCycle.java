@@ -28,11 +28,15 @@ public abstract class AbstractLifeCycle implements LifeCycle{
 	public List<LifeCycleListener> getListeners() {
 		return listeners;
 	}
+	
+	public Object getData(){
+		return null;
+	}
 
-	public void fireLifeCycleEvent(LifeCycle.LifeCyclePhase phase,Object data){
+	public void fireLifeCycleEvent(LifeCycle.LifeCyclePhase phase){
 		if(listeners.size()>0){
 			for(LifeCycleListener listener:listeners){
-				listener.lifeCycleEvent(new LifeCycleEvent(this, phase, data));
+				listener.lifeCycleEvent(new LifeCycleEvent(this, phase, getData()));
 			}
 		}
 	}
@@ -40,9 +44,9 @@ public abstract class AbstractLifeCycle implements LifeCycle{
 	@Override
 	public void start() {
 		if(startFlag.compareAndSet(false, true)){
-			fireLifeCycleEvent(LifeCyclePhase.BEFORE_START,null);
+			fireLifeCycleEvent(LifeCyclePhase.BEFORE_START);
 			start0();
-			fireLifeCycleEvent(LifeCyclePhase.AFTER_START,null);
+			fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
 		}else{
 			log.error("has start:"+this.getClass().getSimpleName());
 		}
@@ -55,9 +59,9 @@ public abstract class AbstractLifeCycle implements LifeCycle{
 	@Override
 	public void stop() {
 		if(stopFlag.compareAndSet(false, true)){
-			fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP,null);
+			fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP);
 			stop0();
-			fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP,null);
+			fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP);
 		}else{
 			log.error("has stop:"+this.getClass().getSimpleName());
 		}

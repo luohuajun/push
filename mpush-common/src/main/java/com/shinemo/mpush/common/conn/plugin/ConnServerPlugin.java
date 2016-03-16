@@ -50,5 +50,5 @@ public class ConnServerPlugin implements LifeCycleListener{
 		zkManage.registerEphemeralSequential(path, value);
         log.error("register server to zk:{},{}",path,value);
 	}
-
+	
 }

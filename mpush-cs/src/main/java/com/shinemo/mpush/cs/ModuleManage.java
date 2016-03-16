@@ -11,9 +11,11 @@ import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.dns.module.DnsModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
+import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.module.ZkModule;
 import com.shinemo.mpush.monitor.service.MonitorDataCollector;
 import com.shinemo.mpush.tools.Jsons;
+import com.shinemo.mpush.tools.MPushUtil;
 
 public class ModuleManage {
 	
@@ -27,10 +29,9 @@ public class ModuleManage {
 	
 	private DnsModule dnsModule = new DnsModule();
 	
-	private ConnServerModule connServerModule = new ConnServerModule();
-//	
+	private ConnServerModule connServerModule = new ConnServerModule(ConfigCenter.holder.connectionServerPort(),ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
+
 //	private GatewayServerModule gatewayServerModule = new GatewayServerModule();
-//	
 //	private AdminServerModule adminServerModule = new AdminServerModule();
 	
 	private LifeCycleListener defaultLifeCycleListener = new DefaultLifeCyclyListener();
