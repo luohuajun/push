@@ -7,15 +7,14 @@ import com.shinemo.mpush.api.Server;
 import com.shinemo.mpush.api.container.BaseLifeCycle;
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
-import com.shinemo.mpush.common.conn.ConnectionServerManage;
+import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-
 public class ConnServerModule extends BaseLifeCycle{
 	
-	private ConnectionServerManage connectionServerManage = ServiceContainer.getInstance(ConnectionServerManage.class, "connectionServerManage");
+	private ServerManage connectionServerManage = ServiceContainer.getInstance(ServerManage.class, "connectionServerManage");
 	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage");
 	private Application application = new Application();
 	
@@ -53,7 +52,7 @@ public class ConnServerModule extends BaseLifeCycle{
             	connectionServerManage.start();
             }
         };
-        ThreadPoolManager.newThread(this.getClass().getSimpleName(), runnable).start();
+        ThreadPoolManager.newThread("mpush-"+this.getClass().getSimpleName(), runnable).start();
 	}
 	
 	@Override

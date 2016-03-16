@@ -9,56 +9,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelOption;
+
 import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.connection.ConnectionManager;
-import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.common.Application;
-import com.shinemo.mpush.common.MessageDispatcher;
-import com.shinemo.mpush.common.conn.ConnectionServerManage;
-import com.shinemo.mpush.core.handler.BindUserHandler;
-import com.shinemo.mpush.core.handler.FastConnectHandler;
-import com.shinemo.mpush.core.handler.HandshakeHandler;
-import com.shinemo.mpush.core.handler.HeartBeatHandler;
-import com.shinemo.mpush.core.handler.HttpProxyHandler;
-import com.shinemo.mpush.core.handler.UnbindUserHandler;
-import com.shinemo.mpush.core.server.ServerChannelHandler;
+import com.shinemo.mpush.common.ServerManage;
+import com.shinemo.mpush.core.conn.ConnChannelInitializer;
 import com.shinemo.mpush.netty.client.HttpClient;
 import com.shinemo.mpush.netty.client.NettyHttpClient;
 import com.shinemo.mpush.netty.connection.NettyConnectionManager;
 import com.shinemo.mpush.netty.server.NettyServer;
 import com.shinemo.mpush.tools.Jsons;
+import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-public class ConnectionServerManageImpl extends NettyServer implements ConnectionServerManage {
+public class ConnectionServerManageImpl extends NettyServer implements ServerManage {
 
 	private static final Logger log = LoggerFactory.getLogger(ConnectionServerManageImpl.class);
 	
 	private Application application;
 
 	private Listener listener;
-	private ServerChannelHandler channelHandler;
 
 	private ConnectionManager connectionManager = new NettyConnectionManager();
 	private HttpClient httpClient = new NettyHttpClient();
 	
 	private static Map<String,Application> holder = Maps.newConcurrentMap();
 
+	private ConnChannelInitializer connChannelInitializer = new ConnChannelInitializer(connectionManager,httpClient);
 	
 	@Override
 	public void init(Listener listener,Application application) {
 		this.listener = listener;
 		this.application = application;
-		init(this.application.getPort());
 		connectionManager.init();
-		MessageDispatcher receiver = new MessageDispatcher();
-		receiver.register(Command.HEARTBEAT, new HeartBeatHandler());
-		receiver.register(Command.HANDSHAKE, new HandshakeHandler());
-		receiver.register(Command.BIND, new BindUserHandler());
-		receiver.register(Command.UNBIND, new UnbindUserHandler());
-		receiver.register(Command.FAST_CONNECT, new FastConnectHandler());
-		receiver.register(Command.HTTP_PROXY, new HttpProxyHandler(httpClient));
-		channelHandler = new ServerChannelHandler(true, connectionManager, receiver);
+		init(this.application.getPort(), ThreadPoolManager.bossExecutor, ThreadPoolManager.workExecutor, connChannelInitializer);
 	}
 
 	@Override
@@ -71,11 +56,6 @@ public class ConnectionServerManageImpl extends NettyServer implements Connectio
 	@Override
 	public void start() {
 		super.start(listener);
-	}
-
-	@Override
-	public ChannelHandler getChannelHandler() {
-		return channelHandler;
 	}
 
 	@Override

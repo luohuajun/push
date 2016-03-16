@@ -2,7 +2,6 @@ package com.shinemo.mpush.common.zk.listener.impl;
 
 
 import com.shinemo.mpush.api.spi.ServiceContainer;
-import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.listener.AbstractDataChangeListener;
@@ -11,10 +10,9 @@ import com.shinemo.mpush.common.zk.listener.AbstractDataChangeListener;
  * connection server 应用  监控
  * 
  */
-public class ConnectionServerPathListener extends AbstractDataChangeListener<Application>{
+public class ConnectionServerPathListener extends AbstractDataChangeListener{
 	
-	@SuppressWarnings("unchecked")
-	private ServerManage<Application> connectionServerManage = ServiceContainer.getInstance(ServerManage.class);
+	private ServerManage connectionServerManage = ServiceContainer.getInstance(ServerManage.class,"connectionServerManage");
 	
 	@Override
 	public String listenerPath() {
@@ -27,7 +25,7 @@ public class ConnectionServerPathListener extends AbstractDataChangeListener<App
 	}
 
 	@Override
-	public ServerManage<Application> getServerManage() {
+	public ServerManage getServerManage() {
 		return connectionServerManage;
 	}
 

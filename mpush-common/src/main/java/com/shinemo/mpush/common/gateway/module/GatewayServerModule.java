@@ -7,7 +7,7 @@ import com.shinemo.mpush.api.Server;
 import com.shinemo.mpush.api.container.BaseLifeCycle;
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
-import com.shinemo.mpush.common.gateway.GatewayServerManage;
+import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
@@ -15,7 +15,7 @@ import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public class GatewayServerModule extends BaseLifeCycle{
 	
-	private GatewayServerManage gatewayServerManage = ServiceContainer.getInstance(GatewayServerManage.class, "gatewayServerManage");
+	private ServerManage gatewayServerManage = ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
 	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage");
 	private Application application = new Application();
 	

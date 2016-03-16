@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.gateway.manage;
+package com.shinemo.mpush.core.admin.manage;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -9,35 +9,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
-import com.shinemo.mpush.api.connection.ConnectionManager;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
-import com.shinemo.mpush.core.gateway.GatewayChannelInitializer;
-import com.shinemo.mpush.netty.connection.NettyConnectionManager;
+import com.shinemo.mpush.core.admin.AdminChannelInitializer;
 import com.shinemo.mpush.netty.server.NettyServer;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-public class GatewayServerManageImpl extends NettyServer implements ServerManage{
+public class AdminServerManageImpl extends NettyServer implements ServerManage{
 
-	private static final Logger log = LoggerFactory.getLogger(GatewayServerManageImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(AdminServerManageImpl.class);
 	
 	private Application application;
 
 	private Listener listener;
+
+	private Map<String,Application> holder = Maps.newConcurrentMap();
 	
-	private ConnectionManager connectionManager = new NettyConnectionManager();
-	
-	private GatewayChannelInitializer gatewayChannelInitializer = new GatewayChannelInitializer(connectionManager);
-	
-	private static Map<String,Application> holder = Maps.newConcurrentMap();
-	
+	private AdminChannelInitializer adminChannelInitializer = new AdminChannelInitializer();
+
 	@Override
 	public void init(Listener listener,Application application) {
 		this.listener = listener;
 		this.application = application;
-		connectionManager.init();
-		init(this.application.getPort(), ThreadPoolManager.bossExecutor,ThreadPoolManager.workExecutor, gatewayChannelInitializer);
+		init(this.application.getPort(), ThreadPoolManager.bossExecutor, ThreadPoolManager.workExecutor, adminChannelInitializer);
 	}
 
 	@Override
@@ -52,7 +47,6 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 
 	@Override
 	public void addOrUpdate(String fullPath, Application application) {
-		
 		if(StringUtils.isNotBlank(fullPath)&&application!=null){
 			holder.put(fullPath, application);
 		}else{
@@ -60,7 +54,6 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 		}
 
 		printList();
-		
 	}
 
 	@Override

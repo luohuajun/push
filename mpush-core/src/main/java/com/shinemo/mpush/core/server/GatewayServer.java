@@ -21,7 +21,7 @@ public final class GatewayServer extends NettyServer {
     }
 
     public void init() {
-        super.init(port);
+//        super.init(port);
         MessageDispatcher receiver = new MessageDispatcher();
         receiver.register(Command.GATEWAY_PUSH, new GatewayPushHandler());
         connectionManager = new NettyConnectionManager();
@@ -34,7 +34,6 @@ public final class GatewayServer extends NettyServer {
         connectionManager.destroy();
     }
 
-    @Override
     public ChannelHandler getChannelHandler() {
         return channelHandler;
     }

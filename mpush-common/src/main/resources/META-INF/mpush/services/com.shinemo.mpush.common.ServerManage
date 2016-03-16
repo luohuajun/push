@@ -1,0 +1,3 @@
+gatewayServerManage=com.shinemo.mpush.core.gateway.manage.GatewayServerManageImpl
+connectionServerManage=com.shinemo.mpush.core.conn.manage.ConnectionServerManageImpl
+adminServerManage=com.shinemo.mpush.core.admin.manage.AdminServerManageImpl

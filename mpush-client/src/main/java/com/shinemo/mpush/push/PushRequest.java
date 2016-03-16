@@ -9,7 +9,6 @@ import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.message.domain.GatewayPushMessage;
 import com.shinemo.mpush.common.router.RemoteRouter;
 import com.shinemo.mpush.common.router.manager.ConnectionRouterManager;
-import com.shinemo.mpush.push.manage.impl.GatewayServerManage;
 import com.shinemo.mpush.tools.Jsons;
 
 import io.netty.channel.ChannelFuture;
@@ -27,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PushRequest implements PushSender.Callback, Runnable {
     private static final Logger LOGGER = LoggerFactory.getLogger(PushRequest.class);
 
-    private final static GatewayServerManage gatewayClientManage = (GatewayServerManage) ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
+//    private final static GatewayServerManage gatewayClientManage = (GatewayServerManage) ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
 
     private PushSender.Callback callback;
     private String userId;
@@ -169,7 +168,8 @@ public class PushRequest implements PushSender.Callback, Runnable {
 
         //2.通过网关连接，把消息发送到所在机器
         ClientLocation location = router.getRouteValue();
-        Connection gatewayConn = gatewayClientManage.getConnection(location.getHost());
+//        Connection gatewayConn = gatewayClientManage.getConnection(location.getHost());
+        Connection gatewayConn = null;
         if (gatewayConn == null || !gatewayConn.isConnected()) {
             this.onFailure(userId);
             return;

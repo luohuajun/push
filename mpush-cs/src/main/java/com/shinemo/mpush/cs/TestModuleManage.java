@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.shinemo.mpush.api.container.LifeCycle.LifeCyclePhase;
 import com.shinemo.mpush.api.container.LifeCycleEvent;
 import com.shinemo.mpush.api.container.LifeCycleListener;
+import com.shinemo.mpush.common.admin.module.AdminServerModule;
 import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
@@ -33,7 +34,7 @@ public class TestModuleManage {
 	private ConnServerModule connServerModule = new ConnServerModule(ConfigCenter.holder.connectionServerPort(),ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
 
 	private GatewayServerModule gatewayServerModule = new GatewayServerModule(ConfigCenter.holder.gatewayServerPort(),ZKPath.GATEWAY_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
-//	private AdminServerModule adminServerModule = new AdminServerModule();
+	private AdminServerModule adminServerModule = new AdminServerModule(ConfigCenter.holder.adminPort(),ZKPath.ADMIN_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
 	
 	private LifeCycleListener defaultLifeCycleListener = new DefaultLifeCyclyListener();
 	
@@ -74,7 +75,7 @@ public class TestModuleManage {
 		dnsModule.start();
 		connServerModule.start();
 		gatewayServerModule.start();
-//		adminServerModule.start();	
+		adminServerModule.start();
 	}
 	
 	public void stop(){
@@ -84,7 +85,7 @@ public class TestModuleManage {
 		dnsModule.stop();
 		connServerModule.stop();
 		gatewayServerModule.stop();
-//		adminServerModule.stop();
+		adminServerModule.stop();
 	}
 	
 	public static void main(String[] args) {

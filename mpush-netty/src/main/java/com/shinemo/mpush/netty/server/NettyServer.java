@@ -1,8 +1,6 @@
 package com.shinemo.mpush.netty.server;
 
 import com.shinemo.mpush.api.Server;
-import com.shinemo.mpush.netty.codec.PacketDecoder;
-import com.shinemo.mpush.netty.codec.PacketEncoder;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -11,44 +9,44 @@ import io.netty.channel.*;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Created by ohun on 2015/12/22.
- */
 public abstract class NettyServer implements Server {
 
     private static final Logger log = LoggerFactory.getLogger(NettyServer.class);
 
-    public enum State {Created, Initialized, Starting, Started, Shutdown}
-
-    protected final AtomicReference<State> serverState = new AtomicReference<>(State.Created);
+    private AtomicBoolean startFlag = new AtomicBoolean();
+    private AtomicBoolean stopFlag = new AtomicBoolean();
 
     private int port;
+    private Executor bossExecutor;
+    private Executor workExecutor;
+    private ChannelInitializer<?> channelInitializer;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
-
-    public void init(int port) {
+    
+    @Override
+    public void init(int port,Executor bossExecutor,Executor workExecutor,ChannelInitializer<?> channelInitializer) {
     	this.port = port;
-        if (!serverState.compareAndSet(State.Created, State.Initialized)) {
-            throw new IllegalStateException("Server already init");
-        }
-    }
+    	this.bossExecutor = bossExecutor;
+    	this.workExecutor = workExecutor;
+    	this.channelInitializer = channelInitializer;
+	}
 
     @Override
     public boolean isRunning() {
-        return serverState.get() == State.Started;
+        return startFlag.get();
     }
 
     @Override
     public void stop(Listener listener) {
-        if (!serverState.compareAndSet(State.Started, State.Shutdown)) {
+        if (!stopFlag.compareAndSet(false,true)) {
             throw new IllegalStateException("The server is already shutdown.");
         }
         if (workerGroup != null) workerGroup.shutdownGracefully().syncUninterruptibly();
@@ -58,64 +56,28 @@ public abstract class NettyServer implements Server {
 
     @Override
     public void start(final Listener listener) {
-        if (!serverState.compareAndSet(State.Initialized, State.Starting)) {
+        if (!startFlag.compareAndSet(false, true)) {
             throw new IllegalStateException("Server already started or have not init");
         }
         createNioServer(listener);
     }
 
     private void createServer(final Listener listener, EventLoopGroup boss, EventLoopGroup work, Class<? extends ServerChannel> clazz) {
-        /***
-         * NioEventLoopGroup 是用来处理I/O操作的多线程事件循环器，
-         * Netty提供了许多不同的EventLoopGroup的实现用来处理不同传输协议。
-         * 在一个服务端的应用会有2个NioEventLoopGroup会被使用。
-         * 第一个经常被叫做‘boss’，用来接收进来的连接。
-         * 第二个经常被叫做‘worker’，用来处理已经被接收的连接，
-         * 一旦‘boss’接收到连接，就会把连接信息注册到‘worker’上。
-         * 如何知道多少个线程已经被使用，如何映射到已经创建的Channels上都需要依赖于EventLoopGroup的实现，
-         * 并且可以通过构造函数来配置他们的关系。
-         */
         this.bossGroup = boss;
         this.workerGroup = work;
-
         try {
-
-            /**
-             * ServerBootstrap 是一个启动NIO服务的辅助启动类
-             * 你可以在这个服务中直接使用Channel
-             */
-
             ServerBootstrap b = new ServerBootstrap();
-
-            /**
-             * 这一步是必须的，如果没有设置group将会报java.lang.IllegalStateException: group not set异常
-             */
             b.group(bossGroup, workerGroup);
-
-            /***
-             * ServerSocketChannel以NIO的selector为基础进行实现的，用来接收新的连接
-             * 这里告诉Channel如何获取新的连接.
-             */
             b.channel(clazz);
-
-
-            /***
-             * 这里的事件处理类经常会被用来处理一个最近的已经接收的Channel。
-             * ChannelInitializer是一个特殊的处理类，
-             * 他的目的是帮助使用者配置一个新的Channel。
-             * 也许你想通过增加一些处理类比如NettyServerHandler来配置一个新的Channel
-             * 或者其对应的ChannelPipeline来实现你的网络程序。
-             * 当你的程序变的复杂时，可能你会增加更多的处理类到pipeline上，
-             * 然后提取这些匿名类到最顶层的类上。
-             */
-            b.childHandler(new ChannelInitializer<SocketChannel>() { // (4)
-                @Override
-                public void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast("decoder", new PacketDecoder());
-                    ch.pipeline().addLast("encoder", PacketEncoder.INSTANCE);
-                    ch.pipeline().addLast("handler", getChannelHandler());
-                }
-            });
+            b.childHandler(channelInitializer);
+//            b.childHandler(new ChannelInitializer<SocketChannel>() { // (4)
+//                @Override
+//                public void initChannel(SocketChannel ch) throws Exception {
+//                    ch.pipeline().addLast("decoder", new PacketDecoder());
+//                    ch.pipeline().addLast("encoder", PacketEncoder.INSTANCE);
+//                    ch.pipeline().addLast("handler", getChannelHandler());
+//                }
+//            });
 
             initOptions(b);
 
@@ -135,10 +97,6 @@ public abstract class NettyServer implements Server {
                 }
             });
             if (f.isSuccess()) {
-            	serverState.set(State.Started);
-                /**
-                 * 这里会一直等待，直到socket被关闭
-                 */
                 f.channel().closeFuture().sync();
             }
 
@@ -155,8 +113,8 @@ public abstract class NettyServer implements Server {
     }
 
     private void createNioServer(final Listener listener) {
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1, ThreadPoolManager.bossExecutor);
-        NioEventLoopGroup workerGroup = new NioEventLoopGroup(0, ThreadPoolManager.workExecutor);
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1, bossExecutor);
+        NioEventLoopGroup workerGroup = new NioEventLoopGroup(0, workExecutor);
         createServer(listener, bossGroup, workerGroup, NioServerSocketChannel.class);
     }
 
@@ -187,7 +145,4 @@ public abstract class NettyServer implements Server {
         b.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
         b.childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
     }
-
-
-    public abstract ChannelHandler getChannelHandler();
 }

@@ -12,23 +12,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.api.spi.ServiceContainer;
+import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZkManage;
-import com.shinemo.mpush.tools.GenericsUtil;
 import com.shinemo.mpush.tools.Jsons;
 
-public abstract class AbstractDataChangeListener<T> extends DataChangeListener {
+public abstract class AbstractDataChangeListener extends DataChangeListener {
 	
 	protected static ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class);
 	
 	private static final Logger log = LoggerFactory.getLogger(AbstractDataChangeListener.class);
-
-	private Class<T> clazz;
-	
-	@SuppressWarnings("unchecked")
-	public AbstractDataChangeListener() {
-		clazz = (Class<T>) GenericsUtil.getSuperClassGenericType(this.getClass(), 0);
-	}
 	
 	public void dataChanged(CuratorFramework client, TreeCacheEvent event, String path) throws Exception {
 		String data = "";
@@ -56,14 +49,13 @@ public abstract class AbstractDataChangeListener<T> extends DataChangeListener {
 	
 	public abstract String getFullPath(String raw);
 	
-	public abstract ServerManage<T> getServerManage();
+	public abstract ServerManage getServerManage();
 
 	private void _initData() {
 		List<String> rawData = zkManage.getChildrenKeys(getRegisterPath());
 		for (String raw : rawData) {
 			String fullPath = getFullPath(raw);
-			T app = getServerApplication(fullPath);
-			getServerManage().addOrUpdate(fullPath, app);
+			getServerManage().addOrUpdate(fullPath, getServerApplication(fullPath));
 		}
 	}
 
@@ -75,13 +67,13 @@ public abstract class AbstractDataChangeListener<T> extends DataChangeListener {
 	private void dataAddOrUpdate(ChildData data) {
 		String path = data.getPath();
 		byte[] rawData = data.getData();
-		T serverApp = Jsons.fromJson(rawData, clazz);
+		Application serverApp = Jsons.fromJson(rawData, Application.class);
 		getServerManage().addOrUpdate(path, serverApp);
 	}
 
-	private T getServerApplication(String fullPath) {
+	private Application getServerApplication(String fullPath) {
 		String rawApp = zkManage.get(fullPath);
-		T app = Jsons.fromJson(rawApp,clazz);
+		Application app = Jsons.fromJson(rawApp,Application.class);
 		return app;
 	}
 	

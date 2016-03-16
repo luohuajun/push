@@ -39,13 +39,12 @@ public final class AdminServer extends NettyServer {
 
 	@Override
 	public void start(Listener listener) {
-		if (!serverState.compareAndSet(State.Initialized, State.Starting)) {
-			throw new IllegalStateException("Server already started or have not init");
-		}
+//		if (!serverState.compareAndSet(State.Initialized, State.Starting)) {
+//			throw new IllegalStateException("Server already started or have not init");
+//		}
 		createNioServer(listener);
 	}
 
-	@Override
 	public ChannelHandler getChannelHandler() {
 		return adminHandler;
 	}
@@ -93,7 +92,7 @@ public final class AdminServer extends NettyServer {
             });
 //            f.await();
             if (f.isSuccess()) {
-            	serverState.set(State.Started);
+//            	serverState.set(State.Started);
                 /**
                  * 这里会一直等待，直到socket被关闭
                  */

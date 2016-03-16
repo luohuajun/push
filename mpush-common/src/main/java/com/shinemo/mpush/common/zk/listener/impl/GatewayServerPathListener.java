@@ -1,7 +1,6 @@
 package com.shinemo.mpush.common.zk.listener.impl;
 
 import com.shinemo.mpush.api.spi.ServiceContainer;
-import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.listener.AbstractDataChangeListener;
@@ -10,10 +9,9 @@ import com.shinemo.mpush.common.zk.listener.AbstractDataChangeListener;
  * gateway server 应用  监控
  * 
  */
-public class GatewayServerPathListener extends AbstractDataChangeListener<Application>{
+public class GatewayServerPathListener extends AbstractDataChangeListener{
 	
-	@SuppressWarnings("unchecked")
-	private ServerManage<Application> gatewayServerManage = ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
+	private ServerManage gatewayServerManage = ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
 	
 	@Override
 	public String listenerPath() {
@@ -21,7 +19,7 @@ public class GatewayServerPathListener extends AbstractDataChangeListener<Applic
 	}
 
 	@Override
-	public ServerManage<Application> getServerManage() {
+	public ServerManage getServerManage() {
 		return gatewayServerManage;
 	}
 
