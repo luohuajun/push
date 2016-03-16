@@ -2,6 +2,9 @@ package com.shinemo.mpush.common.conn.plugin;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Lists;
 import com.shinemo.mpush.api.container.LifeCycleEvent;
 import com.shinemo.mpush.api.container.LifeCycleListener;
@@ -16,6 +19,7 @@ public class ConnServerPlugin implements LifeCycleListener{
 
 	protected List<DataChangeListener> dataChangeListeners = Lists.newArrayList();
 	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage");
+	private static final Logger log = LoggerFactory.getLogger(ConnServerPlugin.class);
 	
 	public ConnServerPlugin() {
 		registerListener(new RedisPathListener());
@@ -32,12 +36,14 @@ public class ConnServerPlugin implements LifeCycleListener{
 	
 	public void registerToZk(){
 		for(DataChangeListener listener:dataChangeListeners){
+			log.info("ConnServerPlugin registerToZk:"+listener.getClass().getSimpleName());
 			zkManage.registerListener(listener);
 		}
 	}
 	
 	public void initData(){
 		for(DataChangeListener listener:dataChangeListeners){
+			log.info("ConnServerPlugin initData:"+listener.getClass().getSimpleName());
 			listener.initData();
 		}
 	}
