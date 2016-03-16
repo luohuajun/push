@@ -1,16 +1,21 @@
 package com.shinemo.mpush.core.conn.manage;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelOption;
-
+import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.connection.ConnectionManager;
 import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.MessageDispatcher;
-import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.conn.ConnectionServerManage;
 import com.shinemo.mpush.core.handler.BindUserHandler;
 import com.shinemo.mpush.core.handler.FastConnectHandler;
@@ -23,9 +28,12 @@ import com.shinemo.mpush.netty.client.HttpClient;
 import com.shinemo.mpush.netty.client.NettyHttpClient;
 import com.shinemo.mpush.netty.connection.NettyConnectionManager;
 import com.shinemo.mpush.netty.server.NettyServer;
+import com.shinemo.mpush.tools.Jsons;
 
-public class ConnectionServerManageImpl extends NettyServer implements ConnectionServerManage,ServerManage<Application> {
+public class ConnectionServerManageImpl extends NettyServer implements ConnectionServerManage {
 
+	private static final Logger log = LoggerFactory.getLogger(ConnectionServerManageImpl.class);
+	
 	private Application application;
 
 	private Listener listener;
@@ -33,10 +41,15 @@ public class ConnectionServerManageImpl extends NettyServer implements Connectio
 
 	private ConnectionManager connectionManager = new NettyConnectionManager();
 	private HttpClient httpClient = new NettyHttpClient();
+	
+	private static Map<String,Application> holder = Maps.newConcurrentMap();
 
+	
 	@Override
-	public void init() {
-		init(application.getPort());
+	public void init(Listener listener,Application application) {
+		this.listener = listener;
+		this.application = application;
+		init(this.application.getPort());
 		connectionManager.init();
 		MessageDispatcher receiver = new MessageDispatcher();
 		receiver.register(Command.HEARTBEAT, new HeartBeatHandler());
@@ -58,16 +71,6 @@ public class ConnectionServerManageImpl extends NettyServer implements Connectio
 	@Override
 	public void start() {
 		super.start(listener);
-	}
-
-	@Override
-	public void initListener(Listener listener) {
-		this.listener = listener;
-	}
-
-	@Override
-	public void initApplication(Application application) {
-		this.application = application;
 	}
 
 	@Override
@@ -95,17 +98,31 @@ public class ConnectionServerManageImpl extends NettyServer implements Connectio
 
 	@Override
 	public void addOrUpdate(String fullPath, Application application) {
-		
+		if(StringUtils.isNotBlank(fullPath)&&application!=null){
+			holder.put(fullPath, application);
+		}else{
+			log.error("fullPath is null or application is null"+fullPath==null?"fullpath is null":fullPath+","+application==null?"application is null":"application is not null");
+		}
+
+		printList();
 	}
 
 	@Override
-	public void remove(String fullPath) {
-		
+	public void remove(String fullPath){
+		holder.remove(fullPath);
+		printList();
 	}
-
+	
 	@Override
 	public Collection<Application> getList() {
-		return null;
+		return Collections.unmodifiableCollection(holder.values());
 	}
+	
+	private void printList(){
+		for(Application app:holder.values()){
+			log.warn(Jsons.toJson(app));
+		}
+	}
+	
 
 }

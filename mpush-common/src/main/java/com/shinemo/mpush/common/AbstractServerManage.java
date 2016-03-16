@@ -28,7 +28,9 @@ public abstract class AbstractServerManage<T extends Application> {
     
     protected List<DataChangeListener> dataChangeListeners = Lists.newArrayList();
     
-    protected ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class);
+    protected ZkManage zkRegister = ServiceContainer.getInstance(ZkManage.class);
+    
+    private Server server;
     
 	public AbstractServerManage() {
 		this.application = getApplication();
@@ -100,7 +102,7 @@ public abstract class AbstractServerManage<T extends Application> {
 		Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                server.init();
+//                server.init();
                 server.start(new Server.Listener() {
                     @Override
                     public void onSuccess() {

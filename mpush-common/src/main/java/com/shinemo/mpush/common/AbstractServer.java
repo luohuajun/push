@@ -102,7 +102,7 @@ public abstract class AbstractServer<T extends Application> {
 		Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                server.init();
+//                server.init();
                 server.start(new Server.Listener() {
                     @Override
                     public void onSuccess() {

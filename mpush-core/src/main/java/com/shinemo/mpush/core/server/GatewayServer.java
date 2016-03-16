@@ -14,14 +14,14 @@ public final class GatewayServer extends NettyServer {
 
     private ServerChannelHandler channelHandler;
     private NettyConnectionManager connectionManager;
-
+    private int port;
+    
     public GatewayServer(int port) {
-        super(port);
+    	this.port = port;
     }
 
-    @Override
     public void init() {
-        super.init();
+        super.init(port);
         MessageDispatcher receiver = new MessageDispatcher();
         receiver.register(Command.GATEWAY_PUSH, new GatewayPushHandler());
         connectionManager = new NettyConnectionManager();

@@ -9,8 +9,6 @@ public interface Server {
 
     void stop(Listener listener);
 
-    void init();
-
     boolean isRunning();
 
     interface Listener {

@@ -112,8 +112,4 @@ public final class AdminServer extends NettyServer {
         }
     }
 
-	@Override
-	public void init() {
-	}
-
 }
