@@ -6,7 +6,7 @@ import com.shinemo.mpush.api.container.LifeCycle.LifeCyclePhase;
 public class LifeCycleEvent {
 
 	//触发该事件的具体实例对象
-	private LifeCycle lifecycle;
+	private transient LifeCycle lifecycle;
 	
 	//事件类型
 	private LifeCycle.LifeCyclePhase phase;

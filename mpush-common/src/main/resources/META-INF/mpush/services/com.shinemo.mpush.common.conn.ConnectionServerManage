@@ -1,0 +1,1 @@
+connectionServerManage=com.shinemo.mpush.core.conn.manage.ConnectionServerManageImpl
