@@ -21,7 +21,7 @@ public class ModuleManage {
 	
 	private static final Logger log = LoggerFactory.getLogger(ModuleManage.class);
 	
-	private ZkModule zkModule = new ZkModule();
+	private ZkModule zkModule = new ZkModule(ConfigCenter.holder.zkIp(), ConfigCenter.holder.zkNamespace(),ConfigCenter.holder.zkDigest());
 	
 	private RedisModule redisModule = new RedisModule();
 	
