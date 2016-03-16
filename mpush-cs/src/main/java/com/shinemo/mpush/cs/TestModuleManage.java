@@ -10,6 +10,7 @@ import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.dns.module.DnsModule;
+import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.module.ZkModule;
@@ -31,7 +32,7 @@ public class TestModuleManage {
 	
 	private ConnServerModule connServerModule = new ConnServerModule(ConfigCenter.holder.connectionServerPort(),ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
 
-//	private GatewayServerModule gatewayServerModule = new GatewayServerModule();
+	private GatewayServerModule gatewayServerModule = new GatewayServerModule(ConfigCenter.holder.gatewayServerPort(),ZKPath.GATEWAY_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
 //	private AdminServerModule adminServerModule = new AdminServerModule();
 	
 	private LifeCycleListener defaultLifeCycleListener = new DefaultLifeCyclyListener();
@@ -42,7 +43,7 @@ public class TestModuleManage {
 		configCenterModule.addLifeCycleListener(defaultLifeCycleListener);
 		dnsModule.addLifeCycleListener(defaultLifeCycleListener);
 		connServerModule.addLifeCycleListener(defaultLifeCycleListener);
-//		gatewayServerModule.addLifeCycleListener(defaultLifeCycleListener);
+		gatewayServerModule.addLifeCycleListener(defaultLifeCycleListener);
 //		adminServerModule.addLifeCycleListener(defaultLifeCycleListener);
 	}
 	
@@ -72,7 +73,7 @@ public class TestModuleManage {
 		configCenterModule.start();
 		dnsModule.start();
 		connServerModule.start();
-//		gatewayServerModule.start();
+		gatewayServerModule.start();
 //		adminServerModule.start();	
 	}
 	
@@ -82,7 +83,7 @@ public class TestModuleManage {
 		configCenterModule.stop();
 		dnsModule.stop();
 		connServerModule.stop();
-//		gatewayServerModule.stop();
+		gatewayServerModule.stop();
 //		adminServerModule.stop();
 	}
 	
