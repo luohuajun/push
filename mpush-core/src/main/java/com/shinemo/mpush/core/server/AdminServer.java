@@ -34,7 +34,6 @@ public final class AdminServer extends NettyServer {
     private AdminHandler adminHandler = new AdminHandler();
 	
 	public AdminServer(int port) {
-		super(port);
 		this.port = port;
 	}
 
@@ -112,5 +111,9 @@ public final class AdminServer extends NettyServer {
             stop(null);
         }
     }
+
+	@Override
+	public void init() {
+	}
 
 }

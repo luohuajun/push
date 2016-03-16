@@ -23,6 +23,7 @@ public class ConnServerModule extends BaseLifeCycle{
 	@Override
 	public void start0() {
 		connectionServerManage.init();
+		connectionServerManage.initApplication(application);
 		connectionServerManage.start();
 	}
 	

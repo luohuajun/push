@@ -12,13 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.api.spi.ServiceContainer;
-import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.tools.GenericsUtil;
 import com.shinemo.mpush.tools.Jsons;
 
-public abstract class AbstractDataChangeListener<T extends Application> extends DataChangeListener {
+public abstract class AbstractDataChangeListener<T> extends DataChangeListener {
 	
 	protected static ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class);
 	
@@ -37,11 +36,11 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 			data = ToStringBuilder.reflectionToString(event.getData(), ToStringStyle.MULTI_LINE_STYLE);
 		}
 		if (Type.NODE_ADDED == event.getType()) {
-			dataAddOrUpdate(event.getData(),clazz);
+			dataAddOrUpdate(event.getData());
 		} else if (Type.NODE_REMOVED == event.getType()) {
 			dataRemove(event.getData());
 		} else if (Type.NODE_UPDATED == event.getType()) {
-			dataAddOrUpdate(event.getData(),clazz);
+			dataAddOrUpdate(event.getData());
 		} else {
 			log.warn(this.getClass().getSimpleName()+"other path:" + path + "," + event.getType().name() + "," + data);
 		}
@@ -60,11 +59,10 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 	public abstract ServerManage<T> getServerManage();
 
 	private void _initData() {
-		// 获取机器列表
 		List<String> rawData = zkManage.getChildrenKeys(getRegisterPath());
 		for (String raw : rawData) {
 			String fullPath = getFullPath(raw);
-			T app = getServerApplication(fullPath,clazz);
+			T app = getServerApplication(fullPath);
 			getServerManage().addOrUpdate(fullPath, app);
 		}
 	}
@@ -74,14 +72,14 @@ public abstract class AbstractDataChangeListener<T extends Application> extends 
 		getServerManage().remove(path);
 	}
 
-	private void dataAddOrUpdate(ChildData data,Class<T> clazz) {
+	private void dataAddOrUpdate(ChildData data) {
 		String path = data.getPath();
 		byte[] rawData = data.getData();
 		T serverApp = Jsons.fromJson(rawData, clazz);
 		getServerManage().addOrUpdate(path, serverApp);
 	}
 
-	private T getServerApplication(String fullPath,Class<T> clazz) {
+	private T getServerApplication(String fullPath) {
 		String rawApp = zkManage.get(fullPath);
 		T app = Jsons.fromJson(rawApp,clazz);
 		return app;

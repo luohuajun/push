@@ -5,7 +5,7 @@ import com.shinemo.mpush.api.spi.SPI;
 import com.shinemo.mpush.common.Application;
 
 @SPI("connectionServerManage")
-public interface ConnectionServerManage {
+public interface ConnectionServerContainer {
 	
 	public void init();
 	

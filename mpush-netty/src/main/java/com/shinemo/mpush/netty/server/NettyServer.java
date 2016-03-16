@@ -30,15 +30,12 @@ public abstract class NettyServer implements Server {
 
     protected final AtomicReference<State> serverState = new AtomicReference<>(State.Created);
 
-    private final int port;
+    private int port;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    public NettyServer(int port) {
-        this.port = port;
-    }
-
-    public void init() {
+    public void init(int port) {
+    	this.port = port;
         if (!serverState.compareAndSet(State.Created, State.Initialized)) {
             throw new IllegalStateException("Server already init");
         }

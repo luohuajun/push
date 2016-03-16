@@ -14,7 +14,6 @@ import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.manage.ZkManageImpl;
 import com.shinemo.mpush.conn.client.ConnectionServerApplication;
-import com.shinemo.mpush.core.server.ConnectionServer;
 import com.shinemo.mpush.tools.Constants;
 import com.shinemo.mpush.tools.MPushUtil;
 import com.shinemo.mpush.tools.Jsons;
