@@ -4,6 +4,7 @@ import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.BaseServerModule;
 import com.shinemo.mpush.common.ServerManage;
+import com.shinemo.mpush.common.gateway.plugin.GatewayServerPlugin;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 
@@ -17,6 +18,7 @@ public class GatewayServerModule extends BaseServerModule{
 		application.setServerRegisterZkPath(path);
 		application.setIp(ip);
 		application.setExtranetIp(extranetIp);
+		addLifeCycleListener(new GatewayServerPlugin());
 	}
 	
 	@Override

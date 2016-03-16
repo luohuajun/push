@@ -30,7 +30,7 @@ public class ConnectionServerManageImpl extends NettyServer implements ServerMan
 	private Application application;
 
 	private Listener listener;
-
+	
 	private ConnectionManager connectionManager = new NettyConnectionManager();
 	private HttpClient httpClient = new NettyHttpClient();
 	

@@ -4,6 +4,7 @@ import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.BaseServerModule;
 import com.shinemo.mpush.common.ServerManage;
+import com.shinemo.mpush.common.conn.plugin.ConnServerPlugin;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public class ConnServerModule extends BaseServerModule{
@@ -16,6 +17,7 @@ public class ConnServerModule extends BaseServerModule{
 		application.setServerRegisterZkPath(path);
 		application.setIp(ip);
 		application.setExtranetIp(extranetIp);
+		addLifeCycleListener(new ConnServerPlugin());
 	}
 	
 	@Override
