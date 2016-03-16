@@ -1,42 +1,15 @@
 package com.shinemo.mpush.common.admin.module;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.shinemo.mpush.api.Server;
-import com.shinemo.mpush.api.container.BaseLifeCycle;
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
+import com.shinemo.mpush.common.BaseServerModule;
 import com.shinemo.mpush.common.ServerManage;
-import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
-import com.shinemo.mpush.common.zk.ZkManage;
-import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-
-public class AdminServerModule extends BaseLifeCycle{
+public class AdminServerModule extends BaseServerModule{
 	
 	private ServerManage adminServerManage = ServiceContainer.getInstance(ServerManage.class, "adminServerManage");
-	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage");
 	private Application application = new Application();
-	
-	private static final Logger log = LoggerFactory.getLogger(GatewayServerModule.class);
-	
-	private Server.Listener startListener = new Server.Listener() {
-		
-		@Override
-		public void onSuccess() {
-			zkManage.registerEphemeralSequential(application.getServerRegisterZkPath(), Jsons.toJson(application));
-			log.error("mpush app start "+ application.getPort() +", success...");
-		}
-		
-		@Override
-		public void onFailure(String message) {
-			log.error("mpush app start "+ application.getPort()+" failuer...");
-			System.exit(-1);
-		}
-		
-	};
 	
 	public AdminServerModule(int port,String path,String ip,String extranetIp) {
 		application.setPort(port);
@@ -47,7 +20,7 @@ public class AdminServerModule extends BaseLifeCycle{
 	
 	@Override
 	public void start0() {
-		adminServerManage.init(startListener, application);
+		adminServerManage.init(getListener(), application);
 		Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -64,6 +37,11 @@ public class AdminServerModule extends BaseLifeCycle{
 	
 	@Override
 	public Object getData() {
+		return application;
+	}
+
+	@Override
+	public Application getApplication() {
 		return application;
 	}
 
