@@ -5,7 +5,7 @@ package com.shinemo.mpush.common;
  * 系统配置 
  *
  */
-public abstract class Application {
+public class Application {
 	
 	private String ip;
 	

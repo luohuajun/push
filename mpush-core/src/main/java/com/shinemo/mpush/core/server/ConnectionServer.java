@@ -4,11 +4,13 @@ package com.shinemo.mpush.core.server;
 import com.shinemo.mpush.api.connection.ConnectionManager;
 import com.shinemo.mpush.api.protocol.Command;
 import com.shinemo.mpush.common.MessageDispatcher;
+import com.shinemo.mpush.common.conn.ConnectionServerManage;
 import com.shinemo.mpush.core.handler.*;
 import com.shinemo.mpush.netty.client.HttpClient;
 import com.shinemo.mpush.netty.client.NettyHttpClient;
 import com.shinemo.mpush.netty.connection.NettyConnectionManager;
 import com.shinemo.mpush.netty.server.NettyServer;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelOption;
@@ -16,7 +18,7 @@ import io.netty.channel.ChannelOption;
 /**
  * Created by ohun on 2015/12/30.
  */
-public final class ConnectionServer extends NettyServer {
+public final class ConnectionServer extends NettyServer implements ConnectionServerManage{
     private ServerChannelHandler channelHandler;
 
     private ConnectionManager connectionManager = new NettyConnectionManager();

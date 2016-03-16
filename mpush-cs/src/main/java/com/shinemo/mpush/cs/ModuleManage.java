@@ -6,12 +6,10 @@ import org.slf4j.LoggerFactory;
 import com.shinemo.mpush.api.container.LifeCycle.LifeCyclePhase;
 import com.shinemo.mpush.api.container.LifeCycleEvent;
 import com.shinemo.mpush.api.container.LifeCycleListener;
-import com.shinemo.mpush.common.admin.module.AdminServerModule;
 import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.dns.module.DnsModule;
-import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.module.ZkModule;
 import com.shinemo.mpush.monitor.service.MonitorDataCollector;
@@ -29,7 +27,7 @@ public class ModuleManage {
 	
 	private DnsModule dnsModule = new DnsModule();
 	
-//	private ConnServerModule connServerModule = new ConnServerModule();
+	private ConnServerModule connServerModule = new ConnServerModule();
 //	
 //	private GatewayServerModule gatewayServerModule = new GatewayServerModule();
 //	
@@ -42,7 +40,7 @@ public class ModuleManage {
 		redisModule.addLifeCycleListener(defaultLifeCycleListener);
 		configCenterModule.addLifeCycleListener(defaultLifeCycleListener);
 		dnsModule.addLifeCycleListener(defaultLifeCycleListener);
-//		connServerModule.addLifeCycleListener(defaultLifeCycleListener);
+		connServerModule.addLifeCycleListener(defaultLifeCycleListener);
 //		gatewayServerModule.addLifeCycleListener(defaultLifeCycleListener);
 //		adminServerModule.addLifeCycleListener(defaultLifeCycleListener);
 	}
@@ -72,7 +70,7 @@ public class ModuleManage {
 		redisModule.start();
 		configCenterModule.start();
 		dnsModule.start();
-//		connServerModule.start();
+		connServerModule.start();
 //		gatewayServerModule.start();
 //		adminServerModule.start();	
 	}
@@ -82,7 +80,7 @@ public class ModuleManage {
 		redisModule.stop();
 		configCenterModule.stop();
 		dnsModule.stop();
-//		connServerModule.stop();
+		connServerModule.stop();
 //		gatewayServerModule.stop();
 //		adminServerModule.stop();
 	}
