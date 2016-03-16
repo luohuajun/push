@@ -45,7 +45,7 @@ public class TestModuleManage {
 		dnsModule.addLifeCycleListener(defaultLifeCycleListener);
 		connServerModule.addLifeCycleListener(defaultLifeCycleListener);
 		gatewayServerModule.addLifeCycleListener(defaultLifeCycleListener);
-//		adminServerModule.addLifeCycleListener(defaultLifeCycleListener);
+		adminServerModule.addLifeCycleListener(defaultLifeCycleListener);
 	}
 	
 	public static class DefaultLifeCyclyListener implements LifeCycleListener{

@@ -30,7 +30,7 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 	
 	private GatewayChannelInitializer gatewayChannelInitializer = new GatewayChannelInitializer(connectionManager);
 	
-	private static Map<String,Application> holder = Maps.newConcurrentMap();
+	private Map<String,Application> holder = Maps.newConcurrentMap();
 	
 	@Override
 	public void init(Listener listener,Application application) {
@@ -76,7 +76,7 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 	
 	private void printList(){
 		for(Application app:holder.values()){
-			log.warn(Jsons.toJson(app));
+			log.warn("gateway server list update,now is :"+Jsons.toJson(app));
 		}
 	}
 

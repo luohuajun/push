@@ -34,7 +34,7 @@ public class ConnectionServerManageImpl extends NettyServer implements ServerMan
 	private ConnectionManager connectionManager = new NettyConnectionManager();
 	private HttpClient httpClient = new NettyHttpClient();
 	
-	private static Map<String,Application> holder = Maps.newConcurrentMap();
+	private Map<String,Application> holder = Maps.newConcurrentMap();
 
 	private ConnChannelInitializer connChannelInitializer = new ConnChannelInitializer(connectionManager,httpClient);
 	
@@ -100,7 +100,7 @@ public class ConnectionServerManageImpl extends NettyServer implements ServerMan
 	
 	private void printList(){
 		for(Application app:holder.values()){
-			log.warn(Jsons.toJson(app));
+			log.warn("connection server list update,now is :"+Jsons.toJson(app));
 		}
 	}
 	
