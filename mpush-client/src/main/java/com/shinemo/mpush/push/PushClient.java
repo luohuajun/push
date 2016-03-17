@@ -4,10 +4,9 @@ import java.util.Collection;
 
 import com.google.common.base.Strings;
 import com.shinemo.mpush.api.PushSender;
-import com.shinemo.mpush.common.AbstractClient;
 //import com.shinemo.mpush.push.zk.listener.impl.GatewayServerPathListener;
 
-public class PushClient extends AbstractClient implements PushSender{
+public class PushClient implements PushSender{
 
     private static final int defaultTimeout = 3000;
 

@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		ConnectionClientMain main = new ConnectionClientMain();
-		main.start();
+//		main.start();
 		
 		List<ConnectionServerApplication> serverList = main.getApplicationList();
 		

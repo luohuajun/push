@@ -20,6 +20,10 @@ public class ConnServerModule extends BaseServerModule{
 		addLifeCycleListener(new ConnServerPlugin());
 	}
 	
+	public ConnServerModule(){
+		addLifeCycleListener(new ConnServerPlugin());
+	}
+	
 	@Override
 	public void start0() {
 		connectionServerManage.init(getListener(), application);

@@ -15,7 +15,7 @@ import java.util.concurrent.locks.LockSupport;
 public class Main {
     public static void main(String[] args) throws Exception {
         PushClient client = new PushClient();
-        client.start();
+//        client.start();
         Thread.sleep(1000);
         for (int i = 0; i < 100; i++) {
         	PushContent content = PushContent.build(PushType.MESSAGE,"this a first push." + i);
