@@ -43,5 +43,10 @@ public class LifeCycleEvent {
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+	@Override
+	public String toString() {
+		return lifecycle.getClass().getSimpleName()+",LifeCycleEvent [phase=" + phase + ", data=" + data + "]";
+	}
 	
 }
