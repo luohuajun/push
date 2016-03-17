@@ -13,7 +13,6 @@ import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;
 import com.shinemo.mpush.common.zk.listener.impl.ConnectionServerPathListener;
-import com.shinemo.mpush.common.zk.listener.impl.RedisPathListener;
 
 public class ConnServerPlugin implements LifeCycleListener{
 
@@ -22,7 +21,6 @@ public class ConnServerPlugin implements LifeCycleListener{
 	private static final Logger log = LoggerFactory.getLogger(ConnServerPlugin.class);
 	
 	public ConnServerPlugin() {
-		registerListener(new RedisPathListener());
 		registerListener(new ConnectionServerPathListener());
 	}
 	

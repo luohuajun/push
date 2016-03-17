@@ -10,7 +10,6 @@ import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.listener.DataChangeListener;
 import com.shinemo.mpush.common.zk.listener.impl.GatewayServerPathListener;
-import com.shinemo.mpush.common.zk.listener.impl.RedisPathListener;
 
 public class GatewayServerPlugin implements LifeCycleListener{
 
@@ -18,7 +17,6 @@ public class GatewayServerPlugin implements LifeCycleListener{
 	private ZkManage zkManage = ServiceContainer.getInstance(ZkManage.class, "zkManage");
 	
 	public GatewayServerPlugin() {
-		registerListener(new RedisPathListener());
 		registerListener(new GatewayServerPathListener());
 	}
 	
