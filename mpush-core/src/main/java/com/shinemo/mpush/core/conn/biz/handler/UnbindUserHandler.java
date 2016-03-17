@@ -1,10 +1,9 @@
-package com.shinemo.mpush.core.handler;
+package com.shinemo.mpush.core.conn.biz.handler;
 
 import com.google.common.base.Strings;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.connection.SessionContext;
 import com.shinemo.mpush.api.event.UserOfflineEvent;
-import com.shinemo.mpush.api.event.UserOnlineEvent;
 import com.shinemo.mpush.api.protocol.Packet;
 import com.shinemo.mpush.common.EventBus;
 import com.shinemo.mpush.common.message.BaseMessageHandler;

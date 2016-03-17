@@ -1,6 +1,7 @@
 package com.shinemo.mpush.core.admin;
 
-import com.shinemo.mpush.core.handler.AdminHandler;
+
+import com.shinemo.mpush.core.admin.handler.AdminHandler;
 
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;

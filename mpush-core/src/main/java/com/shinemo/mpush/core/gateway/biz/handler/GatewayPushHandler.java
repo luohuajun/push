@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.handler;
+package com.shinemo.mpush.core.gateway.biz.handler;
 
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.protocol.Packet;

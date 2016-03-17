@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.server;
+package com.shinemo.mpush.core.conn;
 
 
 import com.shinemo.mpush.api.connection.ConnectionManager;
@@ -23,19 +23,14 @@ import org.slf4j.LoggerFactory;
  * Created by ohun on 2015/12/19.
  */
 @ChannelHandler.Sharable
-public final class ServerChannelHandler extends ChannelHandlerAdapter {
+public final class ConnChannelHandler extends ChannelHandlerAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServerChannelHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnChannelHandler.class);
 
-    /**
-     * 是否启用加密
-     */
-    private final boolean security;
     private final ConnectionManager connectionManager;
     private final PacketReceiver receiver;
 
-    public ServerChannelHandler(boolean security, ConnectionManager connectionManager, PacketReceiver receiver) {
-        this.security = security;
+    public ConnChannelHandler(ConnectionManager connectionManager, PacketReceiver receiver) {
         this.connectionManager = connectionManager;
         this.receiver = receiver;
     }
@@ -70,7 +65,7 @@ public final class ServerChannelHandler extends ChannelHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
     	LoggerManage.info(LogType.CONNECTION, "client connect channel={}", ctx.channel());
         Connection connection = new NettyConnection();
-        connection.init(ctx.channel(), security);
+        connection.init(ctx.channel(), true);
         connectionManager.add(connection);
     }
 

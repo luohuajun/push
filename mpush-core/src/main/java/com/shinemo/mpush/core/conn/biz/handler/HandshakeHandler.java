@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.handler;
+package com.shinemo.mpush.core.conn.biz.handler;
 
 import com.google.common.base.Strings;
 import com.shinemo.mpush.api.connection.Connection;
@@ -16,7 +16,6 @@ import com.shinemo.mpush.core.session.ReusableSession;
 import com.shinemo.mpush.core.session.ReusableSessionManager;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
-import com.shinemo.mpush.tools.MPushUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

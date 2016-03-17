@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.handler;
+package com.shinemo.mpush.core.admin.handler;
 
 import java.util.Date;
 import java.util.List;
