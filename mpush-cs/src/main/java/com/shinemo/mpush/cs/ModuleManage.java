@@ -15,7 +15,6 @@ import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.module.ZkModule;
-import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
 
 public class ModuleManage {
@@ -52,7 +51,7 @@ public class ModuleManage {
 		@Override
 		public void lifeCycleEvent(LifeCycleEvent event) {
 			
-			log.error(" default life cycle:"+Jsons.toJson(event));
+			log.error("default lifecycle:"+event.toString());
 			
 			if(event.getPhase().equals(LifeCyclePhase.BEFORE_START)){
 				
