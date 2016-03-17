@@ -8,7 +8,6 @@ import com.shinemo.mpush.api.container.LifeCycleListener;
 import com.shinemo.mpush.api.container.LifeCycle.LifeCyclePhase;
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.ServerManage;
-import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.dns.module.DnsModule;
@@ -22,7 +21,7 @@ public class ConnModuleManage {
 	
 	private static final Logger log = LoggerFactory.getLogger(ConnModuleManage.class);
 	
-	private ZkModule zkModule = new ZkModule(ConfigCenter.holder.zkIp(), ConfigCenter.holder.zkNamespace(),ConfigCenter.holder.zkDigest());
+	private ZkModule zkModule = new ZkModule("127.0.0.1:2181","mpush-daily","shinemoIpo");
 	
 	private RedisModule redisModule = new RedisModule();
 	
@@ -30,7 +29,7 @@ public class ConnModuleManage {
 	
 	private DnsModule dnsModule = new DnsModule();
 	
-	private ConnServerModule connServerModule = new ConnServerModule(ConfigCenter.holder.connectionServerPort(),ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
+	private ConnServerModule connServerModule = new ConnServerModule(20882,ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
 	
 	private ServerManage connServerManage = ServiceContainer.getInstance(ServerManage.class, "connectionServerManage");
 	
@@ -39,7 +38,7 @@ public class ConnModuleManage {
 		redisModule.start();
 		configCenterModule.start();
 		dnsModule.start();
-		connServerModule.start();
+		connServerModule.startByClient();
 	}
 	
 	public void stop(){
@@ -47,7 +46,7 @@ public class ConnModuleManage {
 		redisModule.stop();
 		configCenterModule.stop();
 		dnsModule.stop();
-		connServerModule.stop();
+		connServerModule.stopByClient();
 	}
 	
 	public static class DefaultLifeCyclyListener implements LifeCycleListener{

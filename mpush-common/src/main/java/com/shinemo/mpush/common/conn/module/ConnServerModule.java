@@ -32,6 +32,14 @@ public class ConnServerModule extends BaseServerModule{
         ThreadPoolManager.newThread("mpush-"+this.getClass().getSimpleName(), runnable).start();
 	}
 	
+	public void startByClient(){
+		super.start();
+	}
+	
+	public void stopByClient(){
+		super.stop();
+	}
+	
 	@Override
 	public void stop0() {
 		connectionServerManage.stop();
