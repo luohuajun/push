@@ -11,10 +11,8 @@ import com.shinemo.mpush.common.ServerManage;
 import com.shinemo.mpush.common.config.module.ConfigCenterModule;
 import com.shinemo.mpush.common.conn.module.ConnServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
-import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.module.ZkModule;
 import com.shinemo.mpush.tools.Jsons;
-import com.shinemo.mpush.tools.MPushUtil;
 
 public class ConnModuleManage {
 	
@@ -26,7 +24,7 @@ public class ConnModuleManage {
 	
 	private ConfigCenterModule configCenterModule = new ConfigCenterModule();
 	
-	private ConnServerModule connServerModule = new ConnServerModule(20882,ZKPath.CONNECTION_SERVER.getWatchPath(),MPushUtil.getLocalIp(),MPushUtil.getExtranetAddress());
+	private ConnServerModule connServerModule = new ConnServerModule();
 	
 	private ServerManage connServerManage = ServiceContainer.getInstance(ServerManage.class, "connectionServerManage");
 	

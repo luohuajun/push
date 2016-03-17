@@ -51,7 +51,7 @@ public abstract class NettyServer implements Server {
         }
         if (workerGroup != null) workerGroup.shutdownGracefully().syncUninterruptibly();
         if (bossGroup != null) bossGroup.shutdownGracefully().syncUninterruptibly();
-        log.error("netty server stop now");
+        log.error("netty server stop now:"+port);
     }
 
     @Override
