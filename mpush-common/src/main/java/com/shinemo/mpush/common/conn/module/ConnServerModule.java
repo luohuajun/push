@@ -33,11 +33,13 @@ public class ConnServerModule extends BaseServerModule{
 	}
 	
 	public void startByClient(){
-		super.start();
+		fireLifeCycleEvent(LifeCyclePhase.BEFORE_START);
+		fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
 	}
 	
 	public void stopByClient(){
-		super.stop();
+		fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
+		fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP);
 	}
 	
 	@Override
