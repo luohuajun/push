@@ -30,6 +30,16 @@ public abstract class BaseServerModule extends BaseLifeCycle{
 		
 	};
 	
+	public void clientStart(){
+		fireLifeCycleEvent(LifeCyclePhase.BEFORE_START);
+		fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
+	}
+	
+	public void clientStop(){
+		fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP);
+		fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP);
+	}
+	
 	public abstract Application getApplication();
 	
 	public Server.Listener getListener(){

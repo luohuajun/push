@@ -34,14 +34,14 @@ public class ConnModuleManage {
 		zkModule.start();
 		redisModule.start();
 		configCenterModule.start();
-		connServerModule.startByClient();
+		connServerModule.clientStart();
 	}
 	
 	public void stop(){
 		zkModule.stop();
 		redisModule.stop();
 		configCenterModule.stop();
-		connServerModule.stopByClient();
+		connServerModule.clientStop();
 	}
 	
 	public static class DefaultLifeCyclyListener implements LifeCycleListener{
