@@ -17,10 +17,12 @@ public abstract class DataChangeListener implements TreeCacheListener{
         }
         
         if(path.startsWith(listenerPath())){
+        	LoggerManage.info(LogType.ZK, "class:{},DataChangeListener:{},{},namespace:{}", this.getClass().getSimpleName(),path,listenerPath(),client.getNamespace());
             dataChanged(client, event, path);
         }else{
         	LoggerManage.warn(LogType.ZK, "class:{},DataChangeListener:{},{},namespace:{}", this.getClass().getSimpleName(),path,listenerPath(),client.getNamespace());
         }
+        
 	}
 	
 	public abstract void initData();
