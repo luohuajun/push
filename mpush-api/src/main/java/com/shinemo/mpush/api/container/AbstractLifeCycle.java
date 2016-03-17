@@ -66,4 +66,13 @@ public abstract class AbstractLifeCycle implements LifeCycle{
 			log.error("has stop:"+this.getClass().getSimpleName());
 		}
 	}
+
+	public AtomicBoolean getStartFlag() {
+		return startFlag;
+	}
+
+	public AtomicBoolean getStopFlag() {
+		return stopFlag;
+	}
+	
 }

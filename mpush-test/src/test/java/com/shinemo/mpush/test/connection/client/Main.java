@@ -17,6 +17,8 @@ public class Main {
 		ConnModuleManage manage = new ConnModuleManage();
 		manage.start();
 		
+		manage.start();
+		
 		List<Application> serverList = Lists.newArrayList(manage.getServerManage().getList());
 		
 		int index = (int) ((Math.random() % serverList.size()) * serverList.size());

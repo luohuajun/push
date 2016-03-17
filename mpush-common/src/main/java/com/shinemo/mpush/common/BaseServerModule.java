@@ -31,13 +31,21 @@ public abstract class BaseServerModule extends BaseLifeCycle{
 	};
 	
 	public void clientStart(){
-		fireLifeCycleEvent(LifeCyclePhase.BEFORE_START);
-		fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
+		if(getStartFlag().compareAndSet(false, true)){
+			fireLifeCycleEvent(LifeCyclePhase.BEFORE_START);
+			fireLifeCycleEvent(LifeCyclePhase.AFTER_START);
+		}else{
+			log.error(this.getClass().getSimpleName()+" has started");
+		}
 	}
 	
 	public void clientStop(){
-		fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP);
-		fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP);
+		if(getStartFlag().compareAndSet(false, true)){
+			fireLifeCycleEvent(LifeCyclePhase.BEFORE_STOP);
+			fireLifeCycleEvent(LifeCyclePhase.AFTER_STOP);
+		}else{
+			log.error(this.getClass().getSimpleName()+" has stoped");
+		}
 	}
 	
 	public abstract Application getApplication();
