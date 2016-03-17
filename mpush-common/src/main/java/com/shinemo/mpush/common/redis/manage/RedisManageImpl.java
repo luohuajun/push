@@ -25,7 +25,7 @@ public class RedisManageImpl implements RedisManage{
             throw new RuntimeException("init redis client error, redis server is none.");
         }
         groups = group;
-        printGroupList();
+        printGroupList("init");
     }
 
 
@@ -34,9 +34,9 @@ public class RedisManageImpl implements RedisManage{
         return Collections.unmodifiableList(groups);
     }
 
-    private void printGroupList() {
+    private void printGroupList(String reason) {
         for (RedisGroup app : groups) {
-        	LoggerManage.log(LogType.REDIS,Jsons.toJson(app));
+        	LoggerManage.log(LogType.REDIS,reason+","+Jsons.toJson(app));
         }
     }
 
