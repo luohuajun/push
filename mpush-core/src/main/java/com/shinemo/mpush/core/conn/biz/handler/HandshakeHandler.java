@@ -14,6 +14,7 @@ import com.shinemo.mpush.common.security.AesCipher;
 import com.shinemo.mpush.common.security.CipherBox;
 import com.shinemo.mpush.core.session.ReusableSession;
 import com.shinemo.mpush.core.session.ReusableSessionManager;
+import com.shinemo.mpush.core.util.MPushUtil;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 
@@ -62,9 +63,7 @@ public final class HandshakeHandler extends BaseMessageHandler<HandshakeMessage>
         ReusableSession session = ReusableSessionManager.INSTANCE.genSession(context);
 
         //5.计算心跳时间
-//        int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
-        
-        int heartbeat = 1000;
+        int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
 
         //6.响应握手成功消息
         HandshakeOkMessage

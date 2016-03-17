@@ -8,6 +8,7 @@ import com.shinemo.mpush.common.message.domain.FastConnectMessage;
 import com.shinemo.mpush.common.message.domain.FastConnectOkMessage;
 import com.shinemo.mpush.core.session.ReusableSession;
 import com.shinemo.mpush.core.session.ReusableSessionManager;
+import com.shinemo.mpush.core.util.MPushUtil;
 import com.shinemo.mpush.log.LogType;
 import com.shinemo.mpush.log.LoggerManage;
 
@@ -40,9 +41,7 @@ public final class FastConnectHandler extends BaseMessageHandler<FastConnectMess
             LoggerManage.info(LogType.CONNECTION, "fast connect failure, not the same device, deviceId={}, session={}", message.deviceId, session.context);
         } else {
             //3.校验成功，重新计算心跳，完成快速重连
-//            int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
-
-            int heartbeat = 1000;
+            int heartbeat = MPushUtil.getHeartbeat(message.minHeartbeat, message.maxHeartbeat);
             
             session.context.setHeartbeat(heartbeat);
             message.getConnection().setSessionContext(session.context);

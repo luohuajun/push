@@ -40,13 +40,6 @@ public final class MPushUtil {
         return LOCAL_IP;
     }
 
-//    public static int getHeartbeat(int min, int max) {
-//        return Math.max(
-//        		ConfigCenter.holder.minHeartbeat(),
-//                Math.min(max, ConfigCenter.holder.maxHeartbeat())
-//        );
-//    }
-
     /**
      * 获取本机ip
      * 只获取第一块网卡绑定的ip地址
