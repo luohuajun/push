@@ -15,7 +15,6 @@ import com.shinemo.mpush.common.gateway.module.GatewayServerModule;
 import com.shinemo.mpush.common.redis.module.RedisModule;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.module.ZkModule;
-import com.shinemo.mpush.monitor.service.MonitorDataCollector;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
 
@@ -88,20 +87,4 @@ public class ModuleManage {
 		adminServerModule.stop();
 	}
 	
-	public static void main(String[] args) {
-		final ModuleManage moduleManage = new ModuleManage();
-		moduleManage.start();
-		
-		//开启监控
-		MonitorDataCollector.start(ConfigCenter.holder.skipDump());
-		
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-            	moduleManage.stop();
-            }
-        });
-	}
-	
-	
-
 }
