@@ -10,8 +10,6 @@ public final class RedisKey {
 
     private static final String USER_ONLINE_KEY = "mp_u_ol_";
 
-    private static final String CONN_NUM_ = "mp_cn_";
-
     public static final String getUserKey(String userId) {
         return USER_PREFIX + userId;
     }
