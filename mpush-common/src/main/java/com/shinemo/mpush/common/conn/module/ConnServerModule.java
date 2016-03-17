@@ -1,5 +1,8 @@
 package com.shinemo.mpush.common.conn.module;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.BaseServerModule;
@@ -11,6 +14,7 @@ public class ConnServerModule extends BaseServerModule{
 	
 	private ServerManage connectionServerManage = ServiceContainer.getInstance(ServerManage.class, "connectionServerManage");
 	private Application application = new Application();
+	private static final Logger log = LoggerFactory.getLogger(ConnServerModule.class);
 	
 	public ConnServerModule(int port,String path,String ip,String extranetIp) {
 		application.setPort(port);
@@ -30,6 +34,7 @@ public class ConnServerModule extends BaseServerModule{
 		Runnable runnable = new Runnable() {
             @Override
             public void run() {
+            	log.error("start run connectionServerManage");
             	connectionServerManage.start();
             }
         };
