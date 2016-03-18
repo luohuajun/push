@@ -47,6 +47,7 @@ public abstract class NettyServer implements Server {
     @Override
     public void stop(Listener listener) {
         if (!stopFlag.compareAndSet(false,true)) {
+        	log.error("netty server has stoped now:"+port);
             throw new IllegalStateException("The server is already shutdown.");
         }
         if (workerGroup != null) workerGroup.shutdownGracefully().syncUninterruptibly();
