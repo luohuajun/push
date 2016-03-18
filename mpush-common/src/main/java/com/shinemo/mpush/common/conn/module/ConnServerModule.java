@@ -1,5 +1,7 @@
 package com.shinemo.mpush.common.conn.module;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +34,17 @@ public class ConnServerModule extends BaseServerModule{
 	public void start0() {
 		connectionServerManage.init(getListener(), application);
 		Runnable runnable = new Runnable() {
+			
+			private volatile AtomicBoolean startFlag = new AtomicBoolean();
+			
             @Override
             public void run() {
-            	log.error("start run connectionServerManage");
-            	connectionServerManage.start();
+            	if(startFlag.compareAndSet(false, true)){
+                	log.error("start run connectionServerManage");
+                	connectionServerManage.start();
+            	}else{
+            		log.error("connectionServerManage thread has stop");
+            	}
             }
         };
         ThreadPoolManager.newThread("mpush-"+this.getClass().getSimpleName(), runnable).start();

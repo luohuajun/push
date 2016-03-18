@@ -2,6 +2,7 @@ package com.shinemo.mpush.cs;
 
 import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.monitor.service.MonitorDataCollector;
+import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public class Main {
 
@@ -12,11 +13,15 @@ public class Main {
 		//开启监控
 		MonitorDataCollector.start(ConfigCenter.holder.skipDump());
 		
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-            	moduleManage.stop();
-            }
-        });
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				moduleManage.stop();
+			}
+		};
+		
+		Thread stop = ThreadPoolManager.newThread("mpush-main", runnable);
+		Runtime.getRuntime().addShutdownHook(stop);
 	}
 	
 }

@@ -21,8 +21,8 @@ public abstract class NettyServer implements Server {
 
     private static final Logger log = LoggerFactory.getLogger(NettyServer.class);
 
-    private AtomicBoolean startFlag = new AtomicBoolean();
-    private AtomicBoolean stopFlag = new AtomicBoolean();
+    private volatile AtomicBoolean startFlag = new AtomicBoolean();
+    private volatile AtomicBoolean stopFlag = new AtomicBoolean();
 
     private int port;
     private Executor bossExecutor;
@@ -105,11 +105,6 @@ public abstract class NettyServer implements Server {
             log.error("server start exception", e);
             if (listener != null) listener.onFailure("start server ex=" + e.getMessage());
             throw new RuntimeException("server start exception, port=" + port, e);
-        } finally {
-            /***
-             * 优雅关闭
-             */
-            stop(null);
         }
     }
 
