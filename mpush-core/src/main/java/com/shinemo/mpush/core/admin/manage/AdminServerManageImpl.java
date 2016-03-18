@@ -37,7 +37,7 @@ public class AdminServerManageImpl extends NettyServer implements ServerManage{
 
 	@Override
 	public void stop() {
-		super.stop(listener);
+		super.stop(null);
 	}
 
 	@Override

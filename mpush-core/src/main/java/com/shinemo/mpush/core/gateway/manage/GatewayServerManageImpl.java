@@ -42,7 +42,7 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 
 	@Override
 	public void stop() {
-		super.stop(listener);
+		super.stop(null);
 	}
 
 	@Override
