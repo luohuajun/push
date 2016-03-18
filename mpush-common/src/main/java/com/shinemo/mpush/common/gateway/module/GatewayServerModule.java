@@ -26,6 +26,10 @@ public class GatewayServerModule extends BaseServerModule{
 		addLifeCycleListener(new GatewayServerPlugin());
 	}
 	
+	public GatewayServerModule() {
+		addLifeCycleListener(new GatewayServerPlugin());
+	}
+	
 	@Override
 	public void start0() {
 		gatewayServerManage.init(getListener(), application);

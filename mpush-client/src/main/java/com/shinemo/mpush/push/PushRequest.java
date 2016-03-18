@@ -25,9 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class PushRequest implements PushSender.Callback, Runnable {
     private static final Logger LOGGER = LoggerFactory.getLogger(PushRequest.class);
-
-//    private final static GatewayServerManage gatewayClientManage = (GatewayServerManage) ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
-
+    private ServerManage gatewayServerManage = ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
     private PushSender.Callback callback;
     private String userId;
     private String content;
