@@ -31,6 +31,11 @@ public class MpushClient{
     	gatewayServerModule = new GatewayServerModule();
     }
     
+    public MpushFuture newRequest(Request request){
+    	MpushFuture future = new MpushFuture(request, 0);
+    	return future;
+    }
+    
     public void init(){
     	zkModule.start();
     	redisModule.start();

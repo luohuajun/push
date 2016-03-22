@@ -127,5 +127,8 @@ public interface ConfigCenter extends Config {
     @Key("admin_port")
     @DefaultValue("4001")
     int adminPort();
+    
+    @DefaultValue("3000")
+    int gatewayRequestDefaultTimeout();
 
 }

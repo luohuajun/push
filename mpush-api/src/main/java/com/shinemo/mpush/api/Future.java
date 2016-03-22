@@ -1,12 +1,12 @@
 package com.shinemo.mpush.api;
 
-public interface Future {
+public interface Future<T> {
 	
     Object get();
 
-    Object get(int timeoutInMillis);
+    Object get(int timeout);
 
-    void setCallback(Callback callback);
+    T setCallback(Callback callback);
 
     boolean isDone();
 	
