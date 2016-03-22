@@ -9,10 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
+import com.shinemo.mpush.api.ChannelClientHandler;
 import com.shinemo.mpush.api.Client;
+import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.connection.ConnectionManager;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.ServerManage;
+import com.shinemo.mpush.common.gateway.GatewayServerManage;
+import com.shinemo.mpush.core.gateway.client.GatewayClientChannelHandler;
 import com.shinemo.mpush.core.gateway.server.GatewayChannelInitializer;
 import com.shinemo.mpush.netty.client.NettyClient;
 import com.shinemo.mpush.netty.client.NettyClientFactory;
@@ -21,7 +25,7 @@ import com.shinemo.mpush.netty.server.NettyServer;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-public class GatewayServerManageImpl extends NettyServer implements ServerManage{
+public class GatewayServerManageImpl extends NettyServer implements ServerManage,GatewayServerManage{
 
 	private static final Logger log = LoggerFactory.getLogger(GatewayServerManageImpl.class);
 	
@@ -64,8 +68,8 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 			holder.put(fullPath, application);
 			try{
 				Client client = new NettyClient(application.getIp(), application.getPort());
-				NettyClientFactory.INSTANCE.create(null);
-//				ClientChannelHandler handler = new ClientChannelHandler(client);
+				ChannelClientHandler handler = new GatewayClientChannelHandler(client);
+				NettyClientFactory.INSTANCE.create(handler);
 				application2Client.put(application, client);
 				ip2Client.put(application.getIp(), client);
 			}catch(Exception e){
@@ -101,6 +105,11 @@ public class GatewayServerManageImpl extends NettyServer implements ServerManage
 		return application;
 	}
 	
+	public Connection getConnection(String ipAndPort) {
+        Client client = ip2Client.get(ipAndPort);
+        if (client == null) return null;
+        return client.getConnection();
+    }
 	
 	
 }

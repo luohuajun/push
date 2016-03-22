@@ -40,6 +40,10 @@ public class MpushFuture implements Future<MpushFuture> {
         th.start();
     }
 	
+	public void cancel(){
+		
+	}
+	
 	public MpushFuture(Request request, int timeout) {
 		this.id = request.getId();
 		this.timeout = timeout;

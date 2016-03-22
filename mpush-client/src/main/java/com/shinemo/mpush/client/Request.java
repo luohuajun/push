@@ -2,6 +2,8 @@ package com.shinemo.mpush.client;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.shinemo.mpush.api.Future.Callback;
+
 public class Request {
 	
 	private static final AtomicLong request_id = new AtomicLong(0);
@@ -9,21 +11,27 @@ public class Request {
     private String content;
     private long timeout;
     private long id;
+    private Callback callback;
 
-    private Request(String userId,String content,long timeout) {
+    private Request(String userId,String content,long timeout,Callback callback) {
     	this.id = newId();
     	this.userId = userId;
     	this.content = content;
     	this.timeout = timeout;
+    	this.callback = callback;
 	}
     
-    public static Request build(String userId,String content,long timeout){
-    	Request request = new Request(userId,content,timeout);
+    public static Request build(String userId,String content,long timeout,Callback callback){
+    	Request request = new Request(userId,content,timeout,callback);
     	return request;
     }
     
+    public static Request build(String userId,String content,Callback callback){
+    	return build(userId, content, 0,callback);
+    }
+    
     public static Request build(String userId,String content){
-    	return build(userId, content, 0);
+    	return build(userId, content, 0,null);
     }
     
     public static AtomicLong getRequestId() {
@@ -49,4 +57,12 @@ public class Request {
         return request_id.getAndIncrement();
     }
 
+	public Callback getCallback() {
+		return callback;
+	}
+
+	public void setCallback(Callback callback) {
+		this.callback = callback;
+	}
+	
 }
