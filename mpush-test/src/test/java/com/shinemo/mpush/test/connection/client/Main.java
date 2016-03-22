@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.concurrent.locks.LockSupport;
 
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.api.ChannelClientHandler;
 import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.security.CipherBox;
-import com.shinemo.mpush.conn.client.ClientChannelHandler;
+import com.shinemo.mpush.core.gateway.client.GatewayClientChannelHandler;
 import com.shinemo.mpush.netty.client.NettyClientFactory;
 import com.shinemo.mpush.netty.client.SecurityNettyClient;
 
@@ -44,7 +45,7 @@ public class Main {
 	    	client.setUserId(userId);
 	    	client.setCipher(cipher);
 			
-			ClientChannelHandler handler = new ClientChannelHandler(client);
+			ChannelClientHandler handler = new GatewayClientChannelHandler(client);
 			NettyClientFactory.INSTANCE.create(handler);
 			Thread.sleep(10);
 		}

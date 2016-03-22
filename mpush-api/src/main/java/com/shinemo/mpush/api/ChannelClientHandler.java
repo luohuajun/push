@@ -1,6 +1,4 @@
-package com.shinemo.mpush.netty.client;
-
-import com.shinemo.mpush.api.Client;
+package com.shinemo.mpush.api;
 
 import io.netty.channel.ChannelHandler;
 

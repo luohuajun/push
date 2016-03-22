@@ -1,4 +1,4 @@
-package com.shinemo.mpush.core.gateway;
+package com.shinemo.mpush.core.gateway.server;
 
 
 import com.shinemo.mpush.api.connection.ConnectionManager;

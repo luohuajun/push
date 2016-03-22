@@ -1,4 +1,4 @@
-package com.shinemo.mpush.push;
+package com.shinemo.mpush.client;
 
 import com.shinemo.mpush.api.spi.ServiceContainer;
 import com.shinemo.mpush.common.ServerManage;

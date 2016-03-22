@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.redis.RedisGroup;
 import com.shinemo.mpush.common.redis.RedisNode;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.ZkManage;
 import com.shinemo.mpush.common.zk.manage.ZkManageImpl;
-import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.tools.Constants;
 import com.shinemo.mpush.tools.MPushUtil;
 import com.shinemo.mpush.tools.Jsons;
@@ -100,7 +100,7 @@ public class ZkUtilTest {
     @Test
     public void testRegisterIp() throws Exception {
         String localIp = MPushUtil.getInetAddress();
-        ConnectionServerApplication app = new ConnectionServerApplication();
+        Application app = new Application();
         zkUtil.registerPersist("/" + localIp, Jsons.toJson(app));
         String value = zkUtil.get("/" + localIp);
         System.out.println(value);

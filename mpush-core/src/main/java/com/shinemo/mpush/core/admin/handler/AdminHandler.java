@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import com.shinemo.mpush.api.RedisKey;
 import com.shinemo.mpush.api.spi.ServiceContainer;
+import com.shinemo.mpush.common.Application;
 import com.shinemo.mpush.common.redis.RedisManageUtil;
 import com.shinemo.mpush.common.zk.ZKPath;
 import com.shinemo.mpush.common.zk.ZkManage;
-import com.shinemo.mpush.conn.client.ConnectionServerApplication;
 import com.shinemo.mpush.tools.Jsons;
 import com.shinemo.mpush.tools.MPushUtil;
 
@@ -93,7 +93,7 @@ public final class AdminHandler extends SimpleChannelInboundHandler<String> {
 				boolean removeSuccess = false;
 				for (String raw : rawData) {
 					String data = zkRegister.get(ZKPath.CONNECTION_SERVER.getFullPath(raw));
-					ConnectionServerApplication application = Jsons.fromJson(data, ConnectionServerApplication.class);
+					Application application = Jsons.fromJson(data, Application.class);
 					if(application.getIp().equals(MPushUtil.getInetAddress())){
 						zkRegister.remove(ZKPath.CONNECTION_SERVER.getFullPath(raw));
 						log.info("delete connection server success:{}",data);
