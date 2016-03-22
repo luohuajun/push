@@ -1,5 +1,7 @@
 package com.shinemo.mpush.client;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -11,17 +13,18 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.Future;
+import com.shinemo.mpush.api.exception.PushMessageException;
 import com.shinemo.mpush.common.config.ConfigCenter;
 import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
-public class MpushFuture implements Future<MpushFuture> {
+public class MpushFuture implements Future {
 
 	private static final Logger log = LoggerFactory.getLogger(MpushFuture.class);
 
 	private static final Map<Long, MpushFuture> futures = Maps.newConcurrentMap();
 
 	private final long id;
-	
+
 	private final int timeout;
 
 	private final Lock lock = new ReentrantLock();
@@ -30,20 +33,18 @@ public class MpushFuture implements Future<MpushFuture> {
 
 	private final long start = System.currentTimeMillis();
 
-	private volatile long sendTime;
-	
-	private Callback callback;
-	
+	private volatile long endTime;
+
 	static {
-        Thread th = ThreadPoolManager.newThread("MpushRequestTimeoutScanTimer", new MpushRequestTimeoutScan());
-        th.setDaemon(true);
-        th.start();
-    }
-	
-	public void cancel(){
-		
+		Thread th = ThreadPoolManager.newThread("MpushRequestTimeoutScanTimer", new MpushRequestTimeoutScan());
+		th.setDaemon(true);
+		th.start();
 	}
-	
+
+	public void cancel() {
+		futures.remove(id);
+	}
+
 	public MpushFuture(Request request, int timeout) {
 		this.id = request.getId();
 		this.timeout = timeout;
@@ -54,75 +55,87 @@ public class MpushFuture implements Future<MpushFuture> {
 		return get(timeout);
 	}
 
+	// 没什么可以返回的，暂时返回null。
 	public Object get(int timeout) {
-		if(timeout<=0){
+		if (timeout <= 0) {
 			timeout = ConfigCenter.holder.gatewayRequestDefaultTimeout();
 		}
-		if(!isDone()){
+		if (!isDone()) {
 			long start = System.currentTimeMillis();
 			lock.lock();
-			try{
-				while(!isDone()){
+			try {
+				while (!isDone()) {
 					done.await(timeout, TimeUnit.MILLISECONDS);
-					if(isDone()||System.currentTimeMillis()-start> timeout){
+					if (isDone() || System.currentTimeMillis() - start > timeout) {
 						break;
 					}
 				}
-			}catch(InterruptedException e){
+			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
-			}finally{
+			} finally {
 				lock.unlock();
 			}
-			
-			if(!isDone()){
-//				throw new TimeoutException(sent>0)
+
+			if (!isDone()) {
+				throw new PushMessageException();
 			}
 		}
 		return null;
 	}
 
-	public MpushFuture setCallback(Callback callback) {
-		this.callback = callback;
-		return this;
-	}
-
 	public boolean isDone() {
-		return false;
+		return endTime > 0;
 	}
-	
-    private void doSend() {
-    	sendTime = System.currentTimeMillis();
-    }
-    
-    private static class MpushRequestTimeoutScan implements Runnable {
 
-        public void run() {
-            while (true) {
-                try {
-                    for (MpushFuture future : futures.values()) {
-                        if (future == null || future.isDone()) {
-                            continue;
-                        }
-                        if (System.currentTimeMillis() - future.getStart() > future.getTimeout()) {
-                        	
-                        	
-//                        	
-//                            // create exception response.
-//                            Response timeoutResponse = new Response(future.getId());
-//                            // set timeout status.
-//                            timeoutResponse.setStatus(future.isSent() ? Response.SERVER_TIMEOUT : Response.CLIENT_TIMEOUT);
-//                            timeoutResponse.setErrorMessage(future.getTimeoutMessage(true));
-//                            // handle response.
-//                            DefaultFuture.received(future.getChannel(), timeoutResponse);
-                        }
-                    }
-                    Thread.sleep(30);
-                } catch (Throwable e) {
-                    log.error("Exception when scan the timeout.", e);
-                }
-            }
-        }
-    }
+	public static void done(long id) {
+		try {
+			MpushFuture future = futures.remove(id);
+			if (future != null) {
+				future.doDone();
+			} else {
+				log.warn("The timeout response finally returned at " + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
+			}
+		} catch (Exception e) {
+			log.error("done exception:"+id,e);
+		}
+	}
+
+	public static MpushFuture getFuture(long id) {
+		return futures.get(id);
+	}
+
+	private void doDone() {
+		lock.lock();
+		try {
+			endTime = System.currentTimeMillis();
+			if (done != null) {
+				done.signal();
+			}
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	private static class MpushRequestTimeoutScan implements Runnable {
+
+		public void run() {
+			while (true) {
+				try {
+					for (MpushFuture future : futures.values()) {
+						if (future == null || future.isDone()) {
+							continue;
+						}
+						if (System.currentTimeMillis() - future.getStart() > future.getTimeout()) {
+							MpushFuture.done(future.id);
+						}
+					}
+					Thread.sleep(30);
+				} catch (Throwable e) {
+					log.error("Exception when scan the timeout.", e);
+				}
+			}
+		}
+	}
 
 	public int getTimeout() {
 		return timeout;
@@ -131,6 +144,5 @@ public class MpushFuture implements Future<MpushFuture> {
 	public long getStart() {
 		return start;
 	}
-
 
 }

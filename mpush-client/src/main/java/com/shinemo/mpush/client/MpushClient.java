@@ -51,6 +51,12 @@ public class MpushClient {
 		}
 		return future;
 	}
+	
+	//nothing to return
+	public void request(Request request){
+		MpushFuture future = newRequest(request);
+		future.get();
+	}
 
 	public void init() {
 		zkModule.start();
@@ -115,6 +121,7 @@ public class MpushClient {
 		final Callback callback = request.getCallback();
 
 		if (router == null) {
+			MpushFuture.done(request.getId());
 			if (callback != null) {
 				callback.onOffline(request.getUserId());
 			}
@@ -125,6 +132,7 @@ public class MpushClient {
 		ClientLocation location = router.getRouteValue();
 		Connection gatewayConn = ((GatewayServerManage) gatewayServerManage).getConnection(location.getHost());
 		if (gatewayConn == null || !gatewayConn.isConnected()) {
+			MpushFuture.done(request.getId());
 			if (callback != null) {
 				callback.onFailure(request.getUserId());
 			}
@@ -135,6 +143,7 @@ public class MpushClient {
 		pushMessage.sendRaw(new ChannelFutureListener() {
 			@Override
 			public void operationComplete(ChannelFuture future) throws Exception {
+				MpushFuture.done(request.getId());
 				if (future.isSuccess()) {
 					if (callback != null) {
 						callback.onSuccess(request.getUserId());
