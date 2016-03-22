@@ -5,12 +5,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 import com.shinemo.mpush.api.Future;
 import com.shinemo.mpush.common.config.ConfigCenter;
+import com.shinemo.mpush.tools.thread.threadpool.ThreadPoolManager;
 
 public class MpushFuture implements Future<MpushFuture> {
 
@@ -31,6 +33,12 @@ public class MpushFuture implements Future<MpushFuture> {
 	private volatile long sendTime;
 	
 	private Callback callback;
+	
+	static {
+        Thread th = ThreadPoolManager.newThread("MpushRequestTimeoutScanTimer", new MpushRequestTimeoutScan());
+        th.setDaemon(true);
+        th.start();
+    }
 	
 	public MpushFuture(Request request, int timeout) {
 		this.id = request.getId();
@@ -81,5 +89,44 @@ public class MpushFuture implements Future<MpushFuture> {
     private void doSend() {
     	sendTime = System.currentTimeMillis();
     }
+    
+    private static class MpushRequestTimeoutScan implements Runnable {
+
+        public void run() {
+            while (true) {
+                try {
+                    for (MpushFuture future : futures.values()) {
+                        if (future == null || future.isDone()) {
+                            continue;
+                        }
+                        if (System.currentTimeMillis() - future.getStart() > future.getTimeout()) {
+                        	
+                        	
+//                        	
+//                            // create exception response.
+//                            Response timeoutResponse = new Response(future.getId());
+//                            // set timeout status.
+//                            timeoutResponse.setStatus(future.isSent() ? Response.SERVER_TIMEOUT : Response.CLIENT_TIMEOUT);
+//                            timeoutResponse.setErrorMessage(future.getTimeoutMessage(true));
+//                            // handle response.
+//                            DefaultFuture.received(future.getChannel(), timeoutResponse);
+                        }
+                    }
+                    Thread.sleep(30);
+                } catch (Throwable e) {
+                    log.error("Exception when scan the timeout.", e);
+                }
+            }
+        }
+    }
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public long getStart() {
+		return start;
+	}
+
 
 }
