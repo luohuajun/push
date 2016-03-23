@@ -34,9 +34,6 @@ public class TestRequest {
     	return build(userId, content, 0,null);
     }
     
-    public static AtomicLong getRequestId() {
-		return request_id;
-	}
 	public String getUserId() {
 		return userId;
 	}
