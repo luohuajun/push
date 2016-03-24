@@ -77,6 +77,7 @@ public class TestMpushFuture implements Future {
 			}
 
 			if (!isDone()) {
+				log.error("not done:"+id);
 				throw new PushMessageException();
 			}
 		}
@@ -87,9 +88,8 @@ public class TestMpushFuture implements Future {
 		return endTime > 0;
 	}
 	
-	//两种情况会执行finishRequest，1:
 	public static void finishRequest(long id){
-		
+		log.error("finishRequest:"+id);
 		try {
 			TestMpushFuture future = futures.remove(id);
 			if (future != null) {
@@ -100,7 +100,6 @@ public class TestMpushFuture implements Future {
 		} catch (Exception e) {
 			log.error("done exception:"+id,e);
 		}
-		
 	}
 
 	public static TestMpushFuture getFuture(long id) {
@@ -129,6 +128,7 @@ public class TestMpushFuture implements Future {
 							continue;
 						}
 						if (System.currentTimeMillis() - future.getStart() > future.getTimeout()) {
+							log.error("MpushRequestTimeoutScan:"+future.id);
 							TestMpushFuture.finishRequest(future.id);
 						}
 					}

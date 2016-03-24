@@ -1,7 +1,11 @@
 package com.shinemo.mpush.client;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+
 import com.shinemo.mpush.api.Future.Callback;
 import com.shinemo.mpush.api.connection.Connection;
 import com.shinemo.mpush.api.exception.PushMessageException;
@@ -32,6 +36,8 @@ public class MpushClient {
 
 	private ServerManage connServerManage = ServiceContainer.getInstance(ServerManage.class, "connectionServerManage");
 	private ServerManage gatewayServerManage = ServiceContainer.getInstance(ServerManage.class, "gatewayServerManage");
+	
+	private static Executor pool = Executors.newFixedThreadPool(5);
 
 	public MpushClient(String zkIpLists, String namespace, String digest) {
 		zkModule = new ZkModule(zkIpLists, namespace, digest);
@@ -44,6 +50,7 @@ public class MpushClient {
 	public MpushFuture newRequest(Request request) {
 		MpushFuture future = new MpushFuture(request, 0);
 		try {
+			pool.execute(new Worker(request, this));
 			send(request);
 		} catch (PushMessageException e) {
 			future.cancel();
@@ -155,6 +162,22 @@ public class MpushClient {
 				}
 			}
 		});
+	}
+	
+	private static class Worker implements Runnable{
+		
+		private Request request;
+		private MpushClient client;
+		Worker(Request request,MpushClient client){
+			this.request = request;
+			this.client = client;
+		}
+		
+		@Override
+		public void run() {
+			this.client.send(request);
+		}
+		
 	}
 
 }
