@@ -1,4 +1,4 @@
-package com.shinemo.mpush.client;
+package com.shinemo.mpush.client.mock;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

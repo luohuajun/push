@@ -1,4 +1,4 @@
-package com.shinemo.mpush.client;
+package com.shinemo.mpush.client.mock;
 
 import java.util.concurrent.atomic.AtomicLong;
 

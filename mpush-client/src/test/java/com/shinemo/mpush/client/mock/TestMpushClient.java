@@ -1,4 +1,4 @@
-package com.shinemo.mpush.client;
+package com.shinemo.mpush.client.mock;
 
 
 import com.shinemo.mpush.api.Future.Callback;
