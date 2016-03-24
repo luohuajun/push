@@ -51,7 +51,6 @@ public class MpushClient {
 		MpushFuture future = new MpushFuture(request, 0);
 		try {
 			pool.execute(new Worker(request, this));
-			send(request);
 		} catch (PushMessageException e) {
 			future.cancel();
 			throw e;

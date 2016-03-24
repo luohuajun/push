@@ -88,12 +88,14 @@ public class MpushFuture implements Future {
 	}
 
 	public static void done(long id) {
+		
 		try {
 			MpushFuture future = futures.remove(id);
 			if (future != null) {
+				log.info("request done:"+id);
 				future.doDone();
 			} else {
-				log.warn("The timeout response finally returned at " + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
+				log.warn("The timeout response:"+id+",finally returned at " + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
 			}
 		} catch (Exception e) {
 			log.error("done exception:"+id,e);
@@ -129,7 +131,8 @@ public class MpushFuture implements Future {
 							MpushFuture.done(future.id);
 						}
 					}
-					Thread.sleep(30);
+					//1秒钟执行一次
+					Thread.sleep(1000);
 				} catch (Throwable e) {
 					log.error("Exception when scan the timeout.", e);
 				}

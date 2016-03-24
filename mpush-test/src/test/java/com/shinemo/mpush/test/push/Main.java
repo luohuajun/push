@@ -12,7 +12,7 @@ public class Main {
     	
     	client.init();
     	
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
         	
         	client.newRequest(Request.build("huang1-"+i, "hello world", new Future.Callback() {
 				
