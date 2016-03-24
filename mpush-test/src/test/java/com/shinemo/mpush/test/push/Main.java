@@ -8,11 +8,13 @@ import java.util.concurrent.locks.LockSupport;
 public class Main {
     public static void main(String[] args) throws Exception {
     	
-    	MpushClient client = new MpushClient("", "", "");
+    	MpushClient client = new MpushClient("127.0.0.1:2181", "mpush-daily", "shinemoIpo");
+    	
+    	client.init();
     	
         for (int i = 0; i < 100; i++) {
         	
-        	client.newRequest(Request.build("huang1", "hello world", new Future.Callback() {
+        	client.newRequest(Request.build("huang1-"+i, "hello world", new Future.Callback() {
 				
 				@Override
 				public void onTimeout(String userId) {

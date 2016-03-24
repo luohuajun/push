@@ -29,7 +29,7 @@ public class Main {
 			String clientVersion =  "1.0." + i;
 			String osName = "android";
 			String osVersion = "1.0.1";
-			String userId = "user-"+i;
+			String userId = "huang1-"+i;
 			String deviceId = "test-device-id-"+i;
 			String cipher = "";
 			byte[] clientKey = CipherBox.INSTANCE.randomAESKey();
