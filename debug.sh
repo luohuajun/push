@@ -8,7 +8,7 @@ echo "start assembly lib..."
 
 rm -rf $base_dir/target
 
-mvn clean install  assembly:assembly -P $ENV
+mvn clean  install  assembly:assembly -Dmaven.test.skip=true -P $ENV
 
 echo "start tar mpush..."
 cd $base_dir/target

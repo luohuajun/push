@@ -1,0 +1,453 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] mpush
+[INFO] mpush-api
+[INFO] mpush-log
+[INFO] mpush-tools
+[INFO] mpush-common
+[INFO] mpush-netty
+[INFO] mpush-client
+[INFO] mpush-core
+[INFO] mpush-monitor
+[INFO] mpush-cs
+[INFO] mpush-test
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush ---
+[INFO] com.shinemo.mpush:mpush:pom:0.0.0.3
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-api 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-api ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-api/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-api ---
+[INFO] com.shinemo.mpush:mpush-api:jar:0.0.0.3
+[INFO] +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] +- com.google.guava:guava:jar:19.0:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-log 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-log ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-log/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-log ---
+[INFO] com.shinemo.mpush:mpush-log:jar:0.0.0.3
+[INFO] +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] +- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-tools 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-tools ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-tools/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-tools ---
+[INFO] com.shinemo.mpush:mpush-tools:jar:0.0.0.3
+[INFO] +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] +- com.google.guava:guava:jar:19.0:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |           \- jline:jline:jar:0.9.94:compile
+[INFO] +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] +- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO] +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] +- commons-net:commons-net:jar:3.4:compile
+[INFO] +- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |  +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |  +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |  +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |  +- log4j:log4j:jar:1.2.17:compile
+[INFO] |  \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |  \- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |     +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |     |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |     \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] \- junit:junit:jar:4.10:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-common 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-common ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-common/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-common ---
+[INFO] com.shinemo.mpush:mpush-common:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |  +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] |  +- com.google.guava:guava:jar:19.0:compile
+[INFO] |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |  +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  +- commons-net:commons-net:jar:3.4:compile
+[INFO] |  \- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |     +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |     +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |     |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |     +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |     +- log4j:log4j:jar:1.2.17:compile
+[INFO] |     \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-netty 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-netty ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-netty/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-netty ---
+[INFO] com.shinemo.mpush:mpush-netty:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-common:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |  |  +- com.google.guava:guava:jar:19.0:compile
+[INFO] |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] |  \- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |     +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |     +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |     |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |     |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |     |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |     |           \- jline:jline:jar:0.9.94:compile
+[INFO] |     +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |     |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |     |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |     +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |     |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |     +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |     +- commons-net:commons-net:jar:3.4:compile
+[INFO] |     \- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |        +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |        +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |        |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |        +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |        +- log4j:log4j:jar:1.2.17:compile
+[INFO] |        \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] +- io.netty:netty-codec:jar:5.0.0.Alpha2:compile
+[INFO] +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] +- io.netty:netty-codec-http:jar:5.0.0.Alpha2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-client 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-client ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-client/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-client ---
+[INFO] com.shinemo.mpush:mpush-client:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |  +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] |  +- com.google.guava:guava:jar:19.0:compile
+[INFO] |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- com.shinemo.mpush:mpush-netty:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-common:jar:0.0.0.3:compile
+[INFO] |  |  \- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  |     +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |  |     +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |     |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |     |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |     |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |     |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  |     +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |     |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |     |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  |     +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |     |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  |     +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  |     +- commons-net:commons-net:jar:3.4:compile
+[INFO] |  |     \- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |  |        +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |  |        +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  |        |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |  |        +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |  |        +- log4j:log4j:jar:1.2.17:compile
+[INFO] |  |        \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] |  +- io.netty:netty-codec:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-codec-http:jar:5.0.0.Alpha2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-core 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-core ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-core/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-core ---
+[INFO] com.shinemo.mpush:mpush-core:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-netty:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-common:jar:0.0.0.3:compile
+[INFO] |  |  \- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  |     +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |  |     +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |     |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |     |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |     |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |     |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  |     +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |     |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |     |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  |     +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |     |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  |     +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  |     +- commons-net:commons-net:jar:3.4:compile
+[INFO] |  |     \- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |  +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-codec:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-codec-http:jar:5.0.0.Alpha2:compile
+[INFO] +- com.shinemo.mpush:mpush-client:jar:0.0.0.3:compile
+[INFO] |  \- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |     +- com.google.guava:guava:jar:19.0:compile
+[INFO] |     \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] +- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-monitor 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-monitor ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-monitor/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-monitor ---
+[INFO] com.shinemo.mpush:mpush-monitor:jar:0.0.0.3
+[INFO] +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] +- com.google.guava:guava:jar:19.0:compile
+[INFO] +- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  +- commons-net:commons-net:jar:3.4:compile
+[INFO] |  +- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |  |  +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  |  |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |  |  +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |  |  +- log4j:log4j:jar:1.2.17:compile
+[INFO] |  |  \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] |  \- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |     \- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |        +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |        |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |        \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-cs 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-cs ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-cs/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-cs ---
+[INFO] com.shinemo.mpush:mpush-cs:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-core:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-netty:jar:0.0.0.3:compile
+[INFO] |  |  +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  |  |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-codec:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:5.0.0.Alpha2:compile
+[INFO] |  |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-codec-http:jar:5.0.0.Alpha2:compile
+[INFO] |  +- com.shinemo.mpush:mpush-client:jar:0.0.0.3:compile
+[INFO] |  +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |  +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |  +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |  +- log4j:log4j:jar:1.2.17:compile
+[INFO] |  \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- com.shinemo.mpush:mpush-monitor:jar:0.0.0.3:compile
+[INFO] |  +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |  +- com.google.guava:guava:jar:19.0:compile
+[INFO] |  +- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  |  +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |  |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |  |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |  |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |  |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  |  +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |  |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |  |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  |  +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |  |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  |  +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  |  +- commons-net:commons-net:jar:3.4:compile
+[INFO] |  |  \- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- org.codehaus.janino:janino:jar:2.7.8:compile
+[INFO] |  \- org.codehaus.janino:commons-compiler:jar:2.7.8:compile
+[INFO] +- com.shinemo.mpush:mpush-common:jar:0.0.0.3:compile
+[INFO] |  \- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building mpush-test 0.0.0.3
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mpush-test ---
+[INFO] Deleting /Users/fenfanxiadewunai/huang/git/push/mpush-test/target
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mpush-test ---
+[INFO] com.shinemo.mpush:mpush-test:jar:0.0.0.3
+[INFO] +- com.shinemo.mpush:mpush-api:jar:0.0.0.3:compile
+[INFO] |  +- io.netty:netty-transport:jar:5.0.0.Alpha2:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-resolver:jar:5.0.0.Alpha2:compile
+[INFO] |  +- com.google.guava:guava:jar:19.0:compile
+[INFO] |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+[INFO] +- com.shinemo.mpush:mpush-netty:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-common:jar:0.0.0.3:compile
+[INFO] |  +- io.netty:netty-codec:jar:5.0.0.Alpha2:compile
+[INFO] |  +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:5.0.0.Alpha2:compile
+[INFO] |  |  \- io.netty:netty-common:jar:5.0.0.Alpha2:compile
+[INFO] |  \- io.netty:netty-codec-http:jar:5.0.0.Alpha2:compile
+[INFO] +- com.shinemo.mpush:mpush-tools:jar:0.0.0.3:compile
+[INFO] |  +- com.google.code.gson:gson:jar:2.5:compile
+[INFO] |  +- org.apache.curator:curator-recipes:jar:2.9.1:compile
+[INFO] |  |  \- org.apache.curator:curator-framework:jar:2.9.1:compile
+[INFO] |  |     \- org.apache.curator:curator-client:jar:2.9.1:compile
+[INFO] |  |        \- org.apache.zookeeper:zookeeper:jar:3.4.6:compile
+[INFO] |  |           \- jline:jline:jar:0.9.94:compile
+[INFO] |  +- org.apache.curator:curator-x-discovery:jar:2.9.1:compile
+[INFO] |  |  \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  |     \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] |  +- redis.clients:jedis:jar:2.8.0:compile
+[INFO] |  |  \- org.apache.commons:commons-pool2:jar:2.3:compile
+[INFO] |  +- org.aeonbits.owner:owner:jar:1.0.9:compile
+[INFO] |  \- commons-net:commons-net:jar:3.4:compile
+[INFO] +- com.shinemo.mpush:mpush-core:jar:0.0.0.3:compile
+[INFO] |  +- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
+[INFO] |  +- ch.qos.logback:logback-classic:jar:1.0.13:compile
+[INFO] |  |  \- ch.qos.logback:logback-core:jar:1.0.13:compile
+[INFO] |  +- commons-logging:commons-logging:jar:1.1.3:compile
+[INFO] |  +- log4j:log4j:jar:1.2.17:compile
+[INFO] |  \- org.logback-extensions:logback-ext-spring:jar:0.1.2:compile
+[INFO] +- com.shinemo.mpush:mpush-cs:jar:0.0.0.3:compile
+[INFO] |  +- com.shinemo.mpush:mpush-monitor:jar:0.0.0.3:compile
+[INFO] |  \- org.codehaus.janino:janino:jar:2.7.8:compile
+[INFO] |     \- org.codehaus.janino:commons-compiler:jar:2.7.8:compile
+[INFO] +- com.shinemo.mpush:mpush-log:jar:0.0.0.3:compile
+[INFO] +- com.shinemo.mpush:mpush-client:jar:0.0.0.3:compile
+[INFO] +- args4j:args4j:jar:2.33:compile
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
+[INFO] \- org.slf4j:slf4j-api:jar:1.7.5:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] mpush ............................................. SUCCESS [  1.176 s]
+[INFO] mpush-api ......................................... SUCCESS [  0.075 s]
+[INFO] mpush-log ......................................... SUCCESS [  0.045 s]
+[INFO] mpush-tools ....................................... SUCCESS [  0.147 s]
+[INFO] mpush-common ...................................... SUCCESS [  0.048 s]
+[INFO] mpush-netty ....................................... SUCCESS [  0.065 s]
+[INFO] mpush-client ...................................... SUCCESS [  0.036 s]
+[INFO] mpush-core ........................................ SUCCESS [  0.056 s]
+[INFO] mpush-monitor ..................................... SUCCESS [  0.036 s]
+[INFO] mpush-cs .......................................... SUCCESS [  0.063 s]
+[INFO] mpush-test ........................................ SUCCESS [  0.058 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.503 s
+[INFO] Finished at: 2016-03-24T14:25:41+08:00
+[INFO] Final Memory: 18M/225M
+[INFO] ------------------------------------------------------------------------
